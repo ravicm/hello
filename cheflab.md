@@ -13,11 +13,12 @@ once download started, browser tab pause download and rightclik on the url, copy
 This will download the package to the workstation node
 ##### for ubuntu run below command to install chef, 
 ```ruby
-**#dpkg -i chef-workstation_20.10.168-1_amd64.deb**
+#dpkg -i chef-workstation_20.10.168-1_amd64.deb
 ```
 ###### Once the chef is installed, verify the version with below command, to ensuer it is installed
-#### #chef --version
-
+```
+#chef --version
+```
 **Create cookbooks directory later we create  all the cookbook**
 #### #mkdir cookbooks
 

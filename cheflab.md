@@ -7,7 +7,9 @@
 ####  download  chef-workstation
 From the **chef downloads** site https://downloads.chef.io/products/workstation, select the OS and download the required version,
 once download started, browser tab pause download and rightclik on the url, copy the link and run below command
-## #wget https://packages.chef.io/files/stable/chef-workstation/20.10.168/ubuntu/20.04/chef-workstation_20.10.168-1_amd64.deb
+```
+#wget https://packages.chef.io/files/stable/chef-workstation/20.10.168/ubuntu/20.04/chef-workstation_20.10.168-1_amd64.deb
+```
 This will download the package to the workstation node
 ##### for ubuntu run below command to install chef, 
 **#dpkg -i chef-workstation_20.10.168-1_amd64.deb**

@@ -83,8 +83,7 @@ Chef Infra Client finished, 1/1 resources updated in 01 seconds
 ### chef-client -zr "recipie[new-cookbook::new-recipie02]"  --> this creates a new file as "newfile"
 
 ---
-@settings {
-  font-size: 100;
+
 
 
 ```js
@@ -114,6 +113,4 @@ service 'httpd' do             --> start the httpd service
 action [:enable, :start] 
 end  
 ```
-@settings {
-  font-size: 100;
-}
+

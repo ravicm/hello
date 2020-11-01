@@ -107,7 +107,7 @@ action :create   --> create the file <br>
 end <br>
 
 
-service 'httpd' do             --> start the httpd service <br>
-action [:enable, :start]  <br>
-end  <br>
+service 'httpd' do             --> start the httpd service
+action [:enable, :start] 
+end  
 ```

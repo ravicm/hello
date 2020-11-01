@@ -101,13 +101,13 @@ package 'httpd' do   --> install httpd package <br>
 action :install <br>
 end <br>
 
-file '/var/www/html/index.html' do  --> content in index.html  <br>
-content 'First delecious recipe' <br>
-action :create   --> create the file <br>
+file '/var/www/html/index.html' do  --> content in index.html  
+content 'First delecious recipe'
+action :create   --> create the file 
 end <br>
 
 
-service 'httpd' do             --> start the httpd service <br>
-action [:enable, :start]  <br>
-end  <br>
+service 'httpd' do             --> start the httpd service 
+action [:enable, :start]  
+end  
 ```

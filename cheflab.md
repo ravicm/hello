@@ -85,32 +85,35 @@ Chef Infra Client finished, 1/1 resources updated in 01 seconds
 ---
 @settings {
   font-size: 100;
-}
+
 
 ```js
-package 'tree' do   --> package installation <br>
-action :install    --> spefifying the action <br>
-end <br>
+package 'tree' do   --> package installation
+action :install    --> spefifying the action
+end 
 
-file 'testfile' do   --> speify the file <br>
-content 'Chef test file' --> content of the file <br>
-action :create            --> action on the files <br>
-owner 'root'              --> owner and group of the file  <br>
+file 'testfile' do   --> speify the file
+content 'Chef test file' --> content of the file
+action :create            --> action on the files
+owner 'root'              --> owner and group of the file 
 group 'root'
-end <br>
+end
 
 
-package 'httpd' do   --> install httpd package <br>
-action :install <br>
-end <br>
+package 'httpd' do   --> install httpd package 
+action :install 
+end 
 
-file '/var/www/html/index.html' do  --> content in index.html  <br>
-content 'First delecious recipe' <br>
-action :create   --> create the file <br>
-end <br>
+file '/var/www/html/index.html' do  --> content in index.html 
+content 'First delecious recipe' 
+action :create   --> create the file 
+end 
 
 
 service 'httpd' do             --> start the httpd service
 action [:enable, :start] 
 end  
 ```
+@settings {
+  font-size: 100;
+}

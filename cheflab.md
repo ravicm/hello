@@ -84,7 +84,7 @@ Chef Infra Client finished, 1/1 resources updated in 01 seconds
 
 ---
 
-```
+```js
 package 'tree' do   --> package installation <br>
 action :install    --> spefifying the action <br>
 end <br>

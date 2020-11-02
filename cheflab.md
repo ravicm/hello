@@ -6,7 +6,7 @@
 ### Create workstation
 ####  download  chef-workstation
 From the **chef downloads** site https://downloads.chef.io/products/workstation  <br>
-![Test Image 1](C:\Users\MYPC\Pictures\chef\os-1.jpg) <br>
+![Test Image 1](images/os-1.jpg) <br>
 select the OS and download the required version, <br>
 once download started, browser tab pause download and rightclik on the url, copy the link and run below command <br>
 ```js

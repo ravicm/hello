@@ -325,6 +325,36 @@ Next time when the recipe is updated, run the below command on chef-workstation 
  ```rb
   #chef-client
  ```
+ #### Once the chef-client is run, the output will be as below
+ ```rb
+ # chef-client
+Starting Chef Infra Client, version 16.6.14
+Patents: https://www.chef.io/patents
+[2020-11-02T13:02:14+00:00] ERROR: shard_seed: Failed to get dmi property serial_number: is dmidecode installed?
+resolving cookbooks for run list: ["new-cookbook01::new-recipe"]
+Synchronizing Cookbooks:
+  - new-cookbook01 (0.1.0)
+Installing Cookbook Gems:
+Compiling Cookbooks...
+Converging 1 resources
+Recipe: new-cookbook01::new-recipe
+  * file[/newfile] action create
+    - create new file /newfile
+    - update content in file /newfile from none to b1db38
+    --- /newfile        2020-11-02 13:02:15.732149257 +0000
+    +++ /.chef-newfile20201102-5329-iahaqg      2020-11-02 13:02:15.728148985 +0000
+    @@ -1 +1,2 @@
+    +Welcome to chef delecies
+
+Running handlers:
+Running handlers complete
+Chef Infra Client finished, 1/1 resources updated in 02 seconds
+```
+##### If the file is up to date, the output will be
+```rb
+Recipe: new-cookbook01::new-recipe
+  * file[/newfile] action create (up to date)
+```
  
  Till now the manual process of the upload of recipes to chef-clients is discussed <br>
 

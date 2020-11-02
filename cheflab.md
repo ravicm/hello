@@ -154,7 +154,9 @@ if local machine is linux use "scp"  <br>
  which displays .config.rb  and the pem file( which is a private key)
  .config.rb consists of the url of chef server
  run the below command to verify the workstation connectivity to the server
- # knife ssl check
+ ```rb
+#knife ssl check
+```
  if the connection is successful, displays below message
  Connecting to host api.chef.io:443
 Successfully verified certificates from `api.chef.io' 

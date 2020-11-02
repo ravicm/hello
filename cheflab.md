@@ -6,8 +6,8 @@
 ### Create workstation
 ####  download  chef-workstation
 From the **chef downloads** site https://downloads.chef.io/products/workstation  <br>
-<img src="images/os1.JPG" >
-select the OS and download the required version, <br>
+<img src="images/os1.JPG" > <br>
+select the OS and download the required version <br>
 once download started, browser tab pause download and rightclik on the url, copy the link and run below command <br>
 ```js
 #wget https://packages.chef.io/files/stable/chef-workstation/20.10.168/ubuntu/20.04/chef-workstation_20.10.168-1_amd64.deb

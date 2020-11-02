@@ -28,7 +28,7 @@ This will download the package to the workstation node
 ## chef genrerate cookbook <cookbook-name>
 #### #chef genrerate cookbook new-cookbook
 After creating the chef cookbook, in the cookbook directory,  default files are created like, <br>
-1. chefignore  <br>
+1. chefignore   --> ignore while update<br>
 2. kitchen.yml for testing the cookbook <br>
 3. metadata.rb     --> name,version,author of the cookbook <br>
 4. readme          --> information about the cookbook, user group etc <br>
@@ -95,18 +95,20 @@ Chef Infra Client finished, 1/1 resources updated in 01 seconds
 package 'tree' do   --> package installation
 action :install    --> spefifying the action
 end 
-
+```
+```rb
 file 'testfile' do   --> speify the file
 content 'Chef test file' --> content of the file
 action :create            --> action on the files
 owner 'root'              --> owner and group of the file 
 group 'root'
 end
-
-
+```
+```rb
 package 'httpd' do   --> install httpd package 
 action :install 
 end 
+
 
 file '/var/www/html/index.html' do  --> content in index.html 
 content 'First delecious recipe' 

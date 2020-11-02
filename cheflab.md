@@ -85,10 +85,9 @@ Chef Infra Client finished, 1/1 resources updated in 01 seconds
 ####	Using knife transfet the code to server
 
 ### to execute this file, run as below
+```rb
 ### chef-client -zr "recipie[new-cookbook::new-recipie02]"  --> this creates a new file as "newfile"
-
----
-
+```
 
 
 ```ruby

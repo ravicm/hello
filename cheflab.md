@@ -252,8 +252,8 @@ the cookbooks in the chef-repo, all the next steps will happen from chef-repo co
 
 move the existing cookbooks from  ~cookbooks folder to ~chef-repo/cookbooks <br>
 ```rb
-mv ~cookbooks ~chef-repo/cookbooks
-rm -rf ~cookbooks
+#mv ~cookbooks ~chef-repo/cookbooks
+#rm -rf ~cookbooks
 ```
 Just make sure delete only the old cookbooks <br>
 
@@ -274,23 +274,23 @@ On server website, click on policy the uploaded cookbook is visible <br>
 next step is run the uploaded recipe of the cookbook on node, with below command <br>
 
 ```
-knife node run_list set <chef-node> "recipe[cookbook-name::recipe-name]"
+#knife node run_list set <chef-node> "recipe[cookbook-name::recipe-name]"
 ```
 example:
 
 ```
-knife node run_list set chef-node01 "recipe[new-cookbook01::new-recipe]"
+#knife node run_list set chef-node01 "recipe[new-cookbook01::new-recipe]"
 ```
 
 To verify the recipe in runlist, run the below command <br>
 
 ```
-knife node show <node-name>
+#knife node show <node-name>
 ```
 Example:
 
 ```
-knife node show chef-node01
+#knife node show chef-node01
 ```
 
 The output of the command will be like below <br>
@@ -314,12 +314,12 @@ on server web page, select the node and click on edit-runlist, which displays th
 Next time when the recipe is updated, run the below command on chef-workstation <br>
 
 ```rb
- knife cookbook upload <cookbook-name>
+ #knife cookbook upload <cookbook-name>
  ```
  This uploads the recipe to server, then run the below command again on the client to update recipe on client <br>
  
  ```rb
-  chef-client
+  #chef-client
  ```
  
  Till now the manual process of the upload of recipes to chef-clients is discussed <br>

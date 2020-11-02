@@ -121,7 +121,7 @@ action [:enable, :start]
 end  
 ```
 
-**Create Cher Server and attaching nodes** <br>
+<ins>**Create Cher Server and attaching nodes** </ins> <br>
 
 create account in manage.chef.io webseite which acts as chef server for workstation and nodes 
 https://manage.chef.io/login <br>

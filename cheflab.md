@@ -141,11 +141,11 @@ if local machine is linux use "scp"  <br>
  ```
  #cd chef-repo
  ```
- ####to list all files including hidden files
+ #### to list all files including hidden files
  ```
  #ls -al 
  ```
- ####change directory to .chef
+ #### change directory to .chef
  ```js
  #cd .chef 
  ```

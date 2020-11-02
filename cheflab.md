@@ -140,10 +140,15 @@ if local machine is linux use "scp"  <br>
  
  ```
  #cd chef-repo
- to list all files including hidden files
+ ```
+ ####to list all files including hidden files
+ ```
  #ls -al 
- change directory to .chef
+ ```
+ ####change directory to .chef
+ ```js
  #cd .chef 
+ ```
  which displays .config.rb  and the pem file( which is a private key)
  .config.rb consists of the url of chef server
  run the below command to verify the workstation connectivity to the server

@@ -141,21 +141,21 @@ if local machine is linux use "scp"  <br>
  On chef workstation run below commands <br>
  
  ```
- #cd chef-repo
+ # cd chef-repo
  ```
  #### to list all files including hidden files
  ```
- #ls -al 
+ # ls -al 
  ```
  #### change directory to .chef
  ```js
- #cd .chef 
+ # cd .chef 
  ```
  which displays .config.rb  and the pem file( which is a private key)
  .config.rb consists of the url of chef server
  run the below command to verify the workstation connectivity to the server
  ```rb
-#knife ssl check
+# knife ssl check
 ```
  if the connection is successful, displays below message
  Connecting to host api.chef.io:443
@@ -178,12 +178,12 @@ into workstation enables ssh to the node <br>
 To create the chef-client on the node, run the below command  <br>
 
 ```rb
-#knife bootstrap <node-ip> --ssh-user <user-name>  --sudo -i <privatekey.pem> -N node <node-name>
+# knife bootstrap <node-ip> --ssh-user <user-name>  --sudo -i <privatekey.pem> -N node <node-name>
 ```
 
 Example: <br>
 ```rb
-#knife bootstrap x5.2xx.2x.x7 --ssh-user root --sudo -i priv.pem -N node node01
+# knife bootstrap x5.2xx.2x.x7 --ssh-user root --sudo -i priv.pem -N node node01
 ```
 
 Once the command is run, if all the components in the command are correct, the output will be as below
@@ -243,7 +243,7 @@ Running handlers:
  Once the chef-clinet is successfully installed on the node, run the below command on chef-workstation <br>
  
  ```rb
- #knife node list
+ # knife node list
  ```
  The lists the nodes which has the chef client installed <br>
  
@@ -256,8 +256,8 @@ the cookbooks in the chef-repo, all the next steps will happen from chef-repo co
 
 move the existing cookbooks from  ~cookbooks folder to ~chef-repo/cookbooks <br>
 ```rb
-#mv ~cookbooks ~chef-repo/cookbooks
-#rm -rf ~cookbooks
+# mv ~cookbooks ~chef-repo/cookbooks
+# rm -rf ~cookbooks
 ```
 Just make sure delete only the old cookbooks <br>
 
@@ -278,28 +278,28 @@ On server website, click on policy the uploaded cookbook is visible <br>
 next step is run the uploaded recipe of the cookbook on node, with below command <br>
 
 ```
-#knife node run_list set <chef-node> "recipe[cookbook-name::recipe-name]"
+# knife node run_list set <chef-node> "recipe[cookbook-name::recipe-name]"
 ```
 example:
 
 ```
-#knife node run_list set chef-node01 "recipe[new-cookbook01::new-recipe]"
+# knife node run_list set chef-node01 "recipe[new-cookbook01::new-recipe]"
 ```
 
 To verify the recipe in runlist, run the below command <br>
 
 ```
-#knife node show <node-name>
+# knife node show <node-name>
 ```
 Example:
 
 ```
-#knife node show chef-node01
+# knife node show chef-node01
 ```
 
 The output of the command will be like below <br>
 ```rb
-chef-node01:
+# chef-node01:
   run_list: recipe[new-cookbook01::new-recipe]
 root@chef-wrokstation01:~/chef-repo/cookbooks/new-cookbook01/recipes# knife node show chef-node01
 Node Name:   chef-node01
@@ -323,7 +323,7 @@ Next time when the recipe is updated, run the below command on chef-workstation 
  This uploads the recipe to server, then run the below command again on the client to update recipe on client <br>
  
  ```rb
-  #chef-client
+  # chef-client
  ```
  #### Once the chef-client is run, the output will be as below
  ```rb

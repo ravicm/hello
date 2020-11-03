@@ -127,10 +127,10 @@ https://manage.chef.io/login <br>
 
 create organization and add nodes, organization  discriminates types of nodes (like web, db etc) <br>
 give name and shortname for the organization, this gives to a page where all the configurations are visible <br>
-
-
+<img src="images/chef-Account.JPG" >
 Click on Administration, which displays all the organizations created <br>
 Click on starter kit (left side)--> shows the download "starter kit" --> clicking on it  downloads starterkit  <br>
+<img src="images/starter-kit.JPG" >
 It downloads into the local machine, which is a .rar file, clikc on the "chef-starter" to extract the files, and it consists of "chef-repo folder" <br>
 click on chef-repo folder and it consists of <br>
 folders, .chef, cookbooks,roles and files .gitignore and Readme. <br>

@@ -8,7 +8,7 @@
 From the **chef downloads** site https://downloads.chef.io/products/workstation  <br>
 <img src="images/os-1.JPG" > <br>
 select the OS and download the required version <br>
-once download started, browser tab pause download and rightclik on the url, copy the link and run below command <br>
+once download started, browser tab pause download and right click on the url, copy the link and run below command <br>
 ```js
 #wget https://packages.chef.io/files/stable/chef-workstation/20.10.168/ubuntu/20.04/chef-workstation_20.10.168-1_amd64.deb
 ```
@@ -17,7 +17,7 @@ This will download the package to the workstation node
 ```js
 #dpkg -i chef-workstation_20.10.168-1_amd64.deb
 ```
-###### Once the chef is installed, verify the version with below command, to ensuer it is installed
+###### Once the chef is installed, verify the version with below command, to ensure it is installed
 ```js
 #chef --version
 ```
@@ -25,21 +25,21 @@ This will download the package to the workstation node
 #### #mkdir cookbooks
 
 #### under cookbooks directory create cookbooks
-## chef genrerate cookbook <cookbook-name>
-#### #chef genrerate cookbook new-cookbook
+## chef generate cookbook <cookbook-name>
+#### #chef generate cookbook new-cookbook
 After creating the chef cookbook, in the cookbook directory,  default files are created like, <br>
 1. chefignore   --> ignore while update<br>
 2. kitchen.yml for testing the cookbook <br>
 3. metadata.rb     --> name,version,author of the cookbook <br>
 4. readme          --> information about the cookbook, user group etc <br>
-5. recipie         --> is the code file <br>
+5. recipe         --> is the code file <br>
 6. spec            --> for unit testing <br>
 7. test            --> for integration test  <br>
 
-### create recipie
-#### chef generate recipie <recipie-name> <br>
+### create recipe
+#### chef generate recipe <recipe-name> <br>
 ### #chef generate recipe new-recipe <br>
-which creates recipie file in default recipes directory <br>
+which creates recipe file in default recipes directory <br>
 ##### Add the content into the recipe file  as show below <br>
 
 ### new-recipie.rb file is like below, which consists of code: <br>
@@ -56,7 +56,7 @@ end                            --> end of the task <br>
 #### Run the chef-client to execute the recipe
 
 ```json
- #chef-client -zr "recipe[new-cookbook::new-recipie]"
+ #chef-client -zr "recipe[new-cookbook::new-recipe]"
 ```
 #### On successful run it produces the output as 
 
@@ -82,21 +82,21 @@ Running handlers complete
 Chef Infra Client finished, 1/1 resources updated in 01 seconds
 
 #### Creating multiple recipes
-####	Using knife transfet the code to server
+####	Using knife transfer the code to server
 
 ### to execute this file, run as below
 ```rb
-### chef-client -zr "recipie[new-cookbook::new-recipie02]"  --> this creates a new file as "newfile"
+### chef-client -zr "recipe[new-cookbook::new-recipe02]"  --> this creates a new file as "newfile"
 ```
 
 
 ```ruby
 package 'tree' do   --> package installation
-action :install    --> spefifying the action
+action :install    --> specifying the action
 end 
 ```
 ```rb
-file 'testfile' do   --> speify the file
+file 'testfile' do   --> specify the file
 content 'Chef test file' --> content of the file
 action :create            --> action on the files
 owner 'root'              --> owner and group of the file 
@@ -110,7 +110,7 @@ end
 
 
 file '/var/www/html/index.html' do  --> content in index.html 
-content 'First delecious recipe' 
+content 'First delicious recipe' 
 action :create   --> create the file 
 end 
 
@@ -131,7 +131,7 @@ give name and shortname for the organization, this gives to a page where all the
 Click on Administration, which displays all the organizations created <br>
 Click on starter kit (left side)--> shows the download "starter kit" --> clicking on it  downloads starterkit  <br>
 <img src="images/starter-kit.JPG" > <br>
-It downloads into the local machine, which is a .rar file, clikc on the "chef-starter" to extract the files, and it consists of "chef-repo folder" <br>
+It downloads into the local machine, which is a .rar file, click on the "chef-starter" to extract the files, and it consists of "chef-repo folder" <br>
 click on chef-repo folder and it consists of <br>
 folders, .chef, cookbooks,roles and files .gitignore and Readme. <br>
 copy the folder chef-repo from local extracted folder  to chef workstation machine <br>
@@ -240,17 +240,17 @@ Running handlers:
  [xx.xx.xx.xx] Running handlers complete
  [xx.xx.xx.xx] Chef Infra Client finished, 0/0 resources updated in 02 seconds
  ```
- Once the chef-clinet is successfully installed on the node, run the below command on chef-workstation <br>
+ Once the chef-client is successfully installed on the node, run the below command on chef-workstation <br>
  
  ```rb
  # knife node list
  ```
  The lists the nodes which has the chef client installed <br>
  
-Initially during the setup of workstation the directory cookbooks is created and ran the various recipies like create file, install package and created webserver
+Initially during the setup of workstation the directory cookbooks is created and ran the various recipes like create file, install package and created webserver
 This ensures the proper running of the packages and installations <br> 
 
-after the downloadind extracting the chef-repo  from server, the chef-repo will also consists of cookbooks <br>
+after the downloading,  extracting the chef-repo  from server, the chef-repo will also consists of cookbooks <br>
 
 the cookbooks in the chef-repo, all the next steps will happen from chef-repo cookbooks <br>
 
@@ -261,7 +261,7 @@ move the existing cookbooks from  ~cookbooks folder to ~chef-repo/cookbooks <br>
 ```
 Just make sure delete only the old cookbooks <br>
 
-Once the cookbooks are moved to the chef-repo directory, chef server need to be updated with the existing cookbooks, from next updates in the recipies in workstation
+Once the cookbooks are moved to the chef-repo directory, chef server need to be updated with the existing cookbooks, from next updates in the recipes in workstation
 will update the server and server updates the clients(nodes) <br>
 
 upload the cookbook with following command <br>
@@ -359,7 +359,7 @@ Recipe: new-cookbook01::new-recipe
  Till now the manual process of the upload of recipes to chef-clients is discussed <br>
 
 
-Automate the process, so that the recipe updates will update the clinet automatically <br>
+Automate the process, so that the recipe updates will update the client automatically <br>
 
 update the cron tab to run the command chef-client at specified time (minutes,hours,days etc.)<br>
 
@@ -374,3 +374,5 @@ Example:<br>
 ```
 
 This will run the chef every specified time and update the node. However it is not a good idea to automate the workstation <br>
+
+

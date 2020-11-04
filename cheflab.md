@@ -292,6 +292,7 @@ Uploaded 1 cookbook.
 ```
 uploads the cookbook new-cookbook01 to server <br>
 On server website, click on policy the uploaded cookbook is visible <br>
+<img src="images/cb01.JPG" > <br>
 next step is run the uploaded recipe of the cookbook on node, with below command <br>
 
 ```
@@ -336,7 +337,7 @@ Tags:
 ```
 
 on server web page, select the node and click on edit-runlist, which displays the runlists <br>
-
+<img src="images/runlist.JPG" > <br>
 
 Next time when the recipe is updated, run the below command on chef-workstation <br>
 

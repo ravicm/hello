@@ -52,10 +52,12 @@ which creates recipe file in default recipes directory <br>
 ##### Add the content into the recipe file  as show below <br>
 
 ### new-recipie.rb file is like below, which consists of code: <br>
+```rb
 file '/newfile' do             --> File name to be created and "do" means create <br>
 content 'Chef new file'        --> Content in the file, after creation of the file, chef will place the content <br>
 action :create                 --> Create the file <br>
 end                            --> end of the task <br>
+```
 
 ### To ensure no syntax error of the file 
 ```
@@ -95,8 +97,9 @@ Chef Infra Client finished, 1/1 resources updated in 01 seconds
 
 ### to execute this file, run as below
 ```rb
-### chef-client -zr "recipe[new-cookbook::new-recipe]"  --> this creates a new file as "newfile"
+### chef-client -zr "recipe[new-cookbook::new-recipe]"  
 ```
+##### This will install multiple packages like 'tree' and 'apache' as show below
 
 
 ```ruby

@@ -25,8 +25,12 @@ This will download the package to the workstation node
 #### #mkdir cookbooks
 
 #### under cookbooks directory create cookbooks
-## chef generate cookbook <cookbook-name>
-#### #chef generate cookbook new-cookbook
+
+#### chef generate cookbook <cookbook-name>
+ ```js
+# chef generate cookbook new-cookbook
+ ```
+ ```
 After creating the chef cookbook, in the cookbook directory,  default files are created like, <br>
 1. chefignore   --> ignore while update<br>
 2. kitchen.yml for testing the cookbook <br>
@@ -35,10 +39,15 @@ After creating the chef cookbook, in the cookbook directory,  default files are 
 5. recipe         --> is the code file <br>
 6. spec            --> for unit testing <br>
 7. test            --> for integration test  <br>
-
-### create recipe
+```
+ 
+#### create recipe
+##### TO create recipe, change the directory to required cookbook, and run below commnd
 #### chef generate recipe <recipe-name> <br>
-### #chef generate recipe new-recipe <br>
+Example:
+ ```
+#chef generate recipe new-recipe <br>
+ ```
 which creates recipe file in default recipes directory <br>
 ##### Add the content into the recipe file  as show below <br>
 
@@ -60,7 +69,7 @@ end                            --> end of the task <br>
 ```
 #### On successful run it produces the output as 
 
-
+```rb
 Starting Chef Infra Client, version 16.6.14
 Patents: https://www.chef.io/patents
 resolving cookbooks for run list: ["new-cookbook::new-recipe01"]
@@ -80,13 +89,13 @@ Recipe: new-cookbook::new-recipe01
 Running handlers:
 Running handlers complete
 Chef Infra Client finished, 1/1 resources updated in 01 seconds
-
+```
 #### Creating multiple recipes
 ####	Using knife transfer the code to server
 
 ### to execute this file, run as below
 ```rb
-### chef-client -zr "recipe[new-cookbook::new-recipe02]"  --> this creates a new file as "newfile"
+### chef-client -zr "recipe[new-cookbook::new-recipe]"  --> this creates a new file as "newfile"
 ```
 
 
@@ -159,7 +168,7 @@ if local machine is linux use "scp"  <br>
 ```
  if the connection is successful, displays below message
  Connecting to host api.chef.io:443
-Successfully verified certificates from `api.chef.io' 
+Successfully verified certificates from `api.chef.io`
 
 Upon connecting the workstation to chef server, next step is to connect the nodes, to the server <br>
 the process of connecting the node to server is called BOOTSTRAPPING <br>
@@ -264,7 +273,7 @@ Just make sure delete only the old cookbooks <br>
 Once the cookbooks are moved to the chef-repo directory, chef server need to be updated with the existing cookbooks, from next updates in the recipes in workstation
 will update the server and server updates the clients(nodes) <br>
 
-upload the cookbook with following command <br>
+upload the cookbook to the server to serve the chef nodes,the command is as follows <br>
 
 ```
 # knife cookbook upload <cookbookname>
@@ -272,6 +281,11 @@ upload the cookbook with following command <br>
 Example: <br>
 ```
 # knife cookbook  upload new-cookbook01
+```
+##### The output
+```
+Uploading new-cookbook01 [0.1.0]
+Uploaded 1 cookbook.
 ```
 uploads the cookbook new-cookbook01 to server <br>
 On server website, click on policy the uploaded cookbook is visible <br>
@@ -284,6 +298,11 @@ example:
 
 ```
 # knife node run_list set chef-node01 "recipe[new-cookbook01::new-recipe]"
+```
+##### The output
+```rb
+chef-node01:
+  run_list: recipe[new-cookbook01::new-recipe]
 ```
 
 To verify the recipe in runlist, run the below command <br>
@@ -368,6 +387,11 @@ in the crontab file add the details as below <br>
 * * * * *  <user>  chef-client
 ```
 Example:<br>
+
+```rb
+# vi /etc/crontab  #  
+```
+####  add the below line into the crontab file and chef-client will run default every one minute and get updates 
 
 ```rb
 * * * * *  root  chef-client

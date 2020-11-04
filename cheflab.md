@@ -91,31 +91,31 @@ Chef Infra Client finished, 1/1 resources updated in 01 seconds
 
 
 ```ruby
-package 'tree' do   --> package installation
-action :install    --> specifying the action
+package 'tree' do   # --> package installation
+action :install    # --> specifying the action
 end 
 ```
 ```rb
-file 'testfile' do   --> specify the file
-content 'Chef test file' --> content of the file
-action :create            --> action on the files
-owner 'root'              --> owner and group of the file 
+file 'testfile' do   # --> specify the file
+content 'Chef test file' #--> content of the file
+action :create            # --> action on the files
+owner 'root'              # --> owner and group of the file 
 group 'root'
 end
 ```
 ```rb
-package 'httpd' do   --> install httpd package 
+package 'apache2' do   # --> install httpd package 
 action :install 
 end 
 
 
-file '/var/www/html/index.html' do  --> content in index.html 
+file '/var/www/html/index.html' do  # --> content in index.html 
 content 'First delicious recipe' 
-action :create   --> create the file 
+action :create   # --> create the file 
 end 
 
 
-service 'httpd' do             --> start the httpd service
+service 'apache2' do            # --> start the httpd service
 action [:enable, :start] 
 end  
 ```

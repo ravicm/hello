@@ -190,12 +190,12 @@ into workstation enables ssh to the node <br>
 To create the chef-client on the node, run the below command  <br>
 
 ```rb
-# knife bootstrap <node-ip> --ssh-user <user-name>  --sudo -i <privatekey.pem> -N node <node-name>
+# knife bootstrap <node-ip> --ssh-user <user-name>  --sudo -i <privatekey.pem> -N <node-name>
 ```
 
 Example: <br>
 ```rb
-# knife bootstrap x5.2xx.2x.x7 --ssh-user root --sudo -i priv.pem -N node node01
+# knife bootstrap x5.2xx.2x.x7 --ssh-user root --sudo -i priv.pem -N chef-node01
 ```
 
 Once the command is run, if all the components in the command are correct, the output will be as below

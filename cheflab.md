@@ -337,7 +337,7 @@ Tags:
 ```
 
 on server web page, select the node and click on edit-runlist, which displays the runlists <br>
-<img src="images/runlist.JPG" > <br>
+<img src="images/runlist01.JPG"> <br>
 
 Next time when the recipe is updated, run the below command on chef-workstation <br>
 

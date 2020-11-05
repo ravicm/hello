@@ -473,8 +473,10 @@ chef-manage-ctl reconfigure
 
 ##### With the FQDN or the IP address of the server in the browser
 ###### First a security message appears as below
+<img src="images/sec01.JPG"> <br>
 
 ###### Click on advanced and continue
+<img src="images/sec02.JPG"> <br>
 
 ###### It opens login web page to manage Chef server
 

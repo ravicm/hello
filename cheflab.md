@@ -2,17 +2,18 @@
 
 #### **This part of Lab describes how to setup the Chef workstation and start creating workbooks and recipes**
 
+
 ##### Workstation:
 ### Create workstation
 ####  download  chef-workstation
-From the **chef downloads** site https://downloads.chef.io/products/workstation  <br>
+1. From the **chef downloads** site https://downloads.chef.io/products/workstation  <br>
 <img src="images/os-1.JPG" > <br>
 select the OS and download the required version <br>
-once download started, browser tab pause download and right click on the url, copy the link and run below command <br>
+2. once download started, browser tab pause download and right click on the url, copy the link and run below command <br>
 ```js
 #wget https://packages.chef.io/files/stable/chef-workstation/20.10.168/ubuntu/20.04/chef-workstation_20.10.168-1_amd64.deb
 ```
-This will download the package to the workstation node
+3. This will download the package to the workstation node
 ##### for ubuntu run below command to install chef, 
 ```js
 #dpkg -i chef-workstation_20.10.168-1_amd64.deb
@@ -22,7 +23,7 @@ This will download the package to the workstation node
 #chef --version
 ```
 **Create cookbooks directory later we create  all the cookbook**
-#### #mkdir cookbooks
+4. #### #mkdir cookbooks
 
 #### under cookbooks directory create cookbooks
 
@@ -41,7 +42,7 @@ After creating the chef cookbook, in the cookbook directory,  default files are 
 7. test            --> for integration test  <br>
 ```
  
-#### create recipe
+5. #### create recipe
 ##### TO create recipe, change the directory to required cookbook, and run below commnd
 #### chef generate recipe <recipe-name> <br>
 Example:
@@ -132,7 +133,7 @@ action [:enable, :start]
 end  
 ```
 
-<ins>**Create Cher Server and attaching nodes** </ins> <br>
+6. <ins>**Create Chef Magaged Server and attaching nodes** </ins> <br>
 
 create account in manage.chef.io webseite which acts as chef server for workstation and nodes 
 https://manage.chef.io/login <br>
@@ -383,7 +384,7 @@ Recipe: new-cookbook01::new-recipe
  Till now the manual process of the upload of recipes to chef-clients is discussed <br>
 
 
-Automate the process, so that the recipe updates will update the client automatically <br>
+7. Automate the process, so that the recipe updates will update the client automatically <br>
 
 update the cron tab to run the command chef-client at specified time (minutes,hours,days etc.)<br>
 
@@ -404,4 +405,89 @@ Example:<br>
 
 This will run the chef every specified time and update the node. However it is not a good idea to automate the workstation <br>
 
+#### The above process is to install the chef with Chef-Server is managed by Chef, where as Workstation and Clients are at own premises
+
+###  Installing the On-Prem Chef-Server
+#### The steps to follow to install the Chef-Server on Ubuntu is as below
+
+##### Download the Chef-Server Package with Wget 
+```rb
+ #wget https://packages.chef.io/files/stable/chef-server/14.0.65/ubuntu/20.04/chef-server-core_14.0.65-1_amd64.deb
+ ```
+##### Install the package 
+```rb
+#  dpkg -i chef-server-core_14.0.65-1_amd64.deb
+```
+Once the installation is done, Run the following command, which reconfigures all the installation 
+```
+# chef-manage-ctl reconfigure
+```
+This will take 5 to 10 minutes to configure the server and show the running messages of the configuration like
+```rb
++set $add_on_override_upstream "chef_manage_webapp";
+    - change mode from '' to '0644'
+    - change owner from '' to 'root'
+    - change group from '' to 'root'
+  * file[/var/opt/opscode/nginx/etc/addon.d/30-opscode-manage_external.conf] action delete (up to date)
+  * template[/var/opt/opscode/nginx/etc/nginx.d/manage.conf] action delete (up to date)
+Recipe: omnibus-chef-manage::default
+  * link[/usr/bin/chef-manage-ctl] action create (up to date)
+  * link[/usr/bin/opscode-manage-ctl] action create (up to date)
+  * file[/var/opt/chef-manage/etc/chef-manage-running.json] action create
+    - create new file /var/opt/chef-manage/etc/chef-manage-running.json
+    - update content in file /var/opt/chef-manage/etc/chef-manage-running.json from none to 5199d2
+    --- /var/opt/chef-manage/etc/chef-manage-running.json       2020-11-05 09:32:15.869262054 +0000
+    +++ /var/opt/chef-manage/etc/.chef-chef-manage-running20201105-87766-yoa1h.json     2020-11-05 09:32:15.869262054 +0000
+  ```
+  
+  After successful configuration the output will be like
+  ```rb
+  Running handlers:
+Running handlers complete
+Chef Client finished, 9/136 resources updated in 14 seconds
+chef-manage Reconfigured!
+```
+##### Create admin user with below command
+```rb
+# chef-server-ctl user-create admin admin administrator admin01@gmail.com 'abc123' --filename  /serv.pem
+```
+/serv.pem:  An RSA private key is generated automatically. This is the user’s private key and should be saved to a safe location, /serv.pem is in root location
+#### Create  organization
+```rb
+# chef-server-ctl org-create 4thcoffee 'A E Inc.' --association_user admin --filename /ae-validator.pem
+```
+In above example, the org is  '4thcoffee 'A E Inc.',  associated name is 'admin' amd valdator key is 'ae-validator.pem'
+
+Once the Org is created, run the reconfiguration command to enable the user and Org
+```rb
+chef-manage-ctl reconfigure
+```
+#### Install Web Manage Interface for the chef Server the command is below
+```rb
+ # chef-server-ctl install chef-manage
+ ```
+ Run the below command to reconfigure the Web Manage, slighly different from above reconfigure
+ ```rb
+ # chef-manage-ctl reconfigure
+ ```
+
+##### With the FQDN or the IP address of the server in the browser
+###### First a security message appears as below
+
+###### Click on advanced and continue
+
+###### It opens login web page to manage Chef server
+
+
+Take the username and password, created during the admin user, in this case 
+user: admin
+password: abc123 (strong password is always recommanded)
+
+##### Once logged in follow the steps in Point 6 from above description
+
+
+
+
+
+ 
 

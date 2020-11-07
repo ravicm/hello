@@ -466,7 +466,7 @@ chef-manage-ctl reconfigure
 ```rb
  # chef-server-ctl install chef-manage
  ```
- Run the below command to reconfigure the Web Manage, slighly different from above reconfigure
+ Run the below command to reconfigure the Web Manage, slighly different from above reconfigure command
  ```rb
  # chef-manage-ctl reconfigure
  ```

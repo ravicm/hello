@@ -22,8 +22,8 @@ select the OS and download the required version <br>
 ```js
 #chef --version
 ```
-**Create cookbooks directory later we create  all the cookbook**
-4. #### #mkdir cookbooks
+4. **Create cookbooks directory later we create  all the cookbook**
+#### #mkdir cookbooks
 
 #### under cookbooks directory create cookbooks
 
@@ -407,7 +407,7 @@ This will run the chef every specified time and update the node. However it is n
 
 #### The above process is to install the chef with Chef-Server is managed by Chef, where as Workstation and Clients are at own premises
 
-###  Installing the On-Prem Chef-Server
+8. ###  Installing the On-Prem Chef-Server, which is a Stand-Alone server
 #### The steps to follow to install the Chef-Server on Ubuntu is as below
 
 ##### Download the Chef-Server Package with Wget 

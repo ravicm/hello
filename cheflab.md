@@ -2,14 +2,13 @@
 
 #### **This part of Lab describes how to setup the Chef workstation and start creating workbooks and recipes**
 
-
 ##### Workstation:
 ### Create workstation
 ####  download  chef-workstation
 1. From the **chef downloads** site https://downloads.chef.io/products/workstation  <br>
 <img src="images/os-1.JPG" > <br>
 select the OS and download the required version <br>
-2. once download started, browser tab pause download and right click on the url, copy the link and run below command <br>
+2. Once download started, browser tab pause download and right click on the url, copy the link and run below command <br>
 ```js
 #wget https://packages.chef.io/files/stable/chef-workstation/20.10.168/ubuntu/20.04/chef-workstation_20.10.168-1_amd64.deb
 ```
@@ -23,8 +22,9 @@ select the OS and download the required version <br>
 #chef --version
 ```
 4. **Create cookbooks directory later we create  all the cookbook**
-#### #mkdir cookbooks
-
+```
+#mkdir cookbooks
+```
 #### under cookbooks directory create cookbooks
 
 #### chef generate cookbook <cookbook-name>
@@ -32,37 +32,37 @@ select the OS and download the required version <br>
 # chef generate cookbook new-cookbook
  ```
  ```
-After creating the chef cookbook, in the cookbook directory,  default files are created like, <br>
-1. chefignore   --> ignore while update<br>
-2. kitchen.yml for testing the cookbook <br>
-3. metadata.rb     --> name,version,author of the cookbook <br>
-4. readme          --> information about the cookbook, user group etc <br>
-5. recipe         --> is the code file <br>
-6. spec            --> for unit testing <br>
-7. test            --> for integration test  <br>
+After creating the chef cookbook, in the cookbook directory,  default files are created like
+a. chefignore   --> ignore while update
+b. kitchen.yml for testing the cookbook 
+c. metadata.rb     --> name,version,author of the cookbook
+d. readme          --> information about the cookbook, user group etc 
+e. recipe         --> is the code file 
+f. spec            --> for unit testing 
+g. test            --> for integration test  
 ```
  
 5. #### create recipe
-##### TO create recipe, change the directory to required cookbook, and run below commnd
+##### TO create recipe, change the directory to required cookbook, and run below command
 #### chef generate recipe <recipe-name> <br>
 Example:
  ```
-#chef generate recipe new-recipe <br>
+#chef generate recipe new-recipe
  ```
 which creates recipe file in default recipes directory <br>
 ##### Add the content into the recipe file  as show below <br>
 
 ### new-recipie.rb file is like below, which consists of code: <br>
 ```rb
-file '/newfile' do             --> File name to be created and "do" means create <br>
-content 'Chef new file'        --> Content in the file, after creation of the file, chef will place the content <br>
-action :create                 --> Create the file <br>
-end                            --> end of the task <br>
+file '/newfile' do            # --> File name to be created and "do" means create <br>
+content 'Chef new file'       # --> Content in the file, after creation of the file, chef will place the content <br>
+action :create                 # --> Create the file <br>
+end                           # --> end of the task <br>
 ```
 
 ### To ensure no syntax error of the file 
 ```
-#### #chef exec ruby -c new-cookbook/recipes/new-recipie.rb 
+#chef exec ruby -c new-cookbook/recipes/new-recipie.rb 
 
 ```
 #### Run the chef-client to execute the recipe
@@ -133,7 +133,7 @@ action [:enable, :start]
 end  
 ```
 
-6. <ins>**Create Chef Magaged Server and attaching nodes** </ins> <br>
+6. <ins>**Create Cher Server and attaching nodes** </ins> <br>
 
 create account in manage.chef.io webseite which acts as chef server for workstation and nodes 
 https://manage.chef.io/login <br>
@@ -338,13 +338,18 @@ Tags:
 ```
 
 on server web page, select the node and click on edit-runlist, which displays the runlists <br>
-<img src="images/runlist01.JPG"> <br>
+<img src="images/runlist01.JPG" > <br>
 
 Next time when the recipe is updated, run the below command on chef-workstation <br>
 
 ```rb
  #knife cookbook upload <cookbook-name>
  ```
+ example:
+ ```
+ #knife cookbook upload new-cookbook01
+ ```
+ 
  This uploads the recipe to server, then run the below command again on the client to update recipe on client <br>
  
  ```rb
@@ -386,7 +391,7 @@ Recipe: new-cookbook01::new-recipe
 
 7. Automate the process, so that the recipe updates will update the client automatically <br>
 
-update the cron tab to run the command chef-client at specified time (minutes,hours,days etc.)<br>
+update the crontab to run the command chef-client at specified time (minutes,hours,days etc.)<br>
 
 in the crontab file add the details as below <br>
 ```
@@ -405,7 +410,15 @@ Example:<br>
 
 This will run the chef every specified time and update the node. However it is not a good idea to automate the workstation <br>
 
+---
+
 #### The above process is to install the chef with Chef-Server is managed by Chef, where as Workstation and Clients are at own premises
+#### Chef allows to have On-Prem Chef-Server, this will enable all to manage locally
+There are two types of On-Prem servers, they are: <br>
+a. ###### Stand-Alone  --> Everything on a single machine <br>
+b. ###### High-Availability --> Machines configured for front-end and back-end, allowing for failover on the back-end and load-balancing on the front-end, as required <br>
+
+###### There is one more type Tiered setup, however it is deprecated
 
 8. ###  Installing the On-Prem Chef-Server, which is a Stand-Alone server
 #### The steps to follow to install the Chef-Server on Ubuntu is as below
@@ -466,7 +479,7 @@ chef-manage-ctl reconfigure
 ```rb
  # chef-server-ctl install chef-manage
  ```
- Run the below command to reconfigure the Web Manage, slighly different from above reconfigure command
+ Run the below command to reconfigure the Web Manage, slighly different from above reconfigure
  ```rb
  # chef-manage-ctl reconfigure
  ```
@@ -485,11 +498,5 @@ Take the username and password, created during the admin user, in this case
 user: admin
 password: abc123 (strong password is always recommanded)
 
-##### Once logged in follow the steps in Point 6 from above description
-
-
-
-
-
- 
+##### Once logged in follow the steps in <ins>Point 6</ins> from above description
 

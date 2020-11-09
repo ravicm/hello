@@ -273,7 +273,11 @@ The required ports are opened properly(port 22 for ssh and other application por
 **copy the nodes private key to workstation "chef-repo" directory** 
 To run anything on the Chef-Client, all the configurations are created and worked at Chef-workstation and will be uploaded to the server and server in turn uploads to clients. To update on Clients we use the command starting with **"Knife"**
 
-To create the chef-client on the node, run the below command  <br>
+To create the chef-client on the node, change to **chef-repo** directory  <br>
+```rb
+# cd chef-repo
+```
+Run the below command
 
 ```rb
 # knife bootstrap <node-ip> --ssh-user <user-name>  --sudo -i <privatekey.pem> -N <node-name>
@@ -387,12 +391,12 @@ This step is important as the recipe will be updated to the chef-client, which i
 **Make sure the right cookbook/recipe uploaded to the correct node**
 This way, Clients can be divided into categories like Web, DB nodes, etc.
 
-```
+```rb
 # knife node run_list set <chef-node> "recipe[cookbook-name::recipe-name]"
 ```
 example:
 
-```
+```rb
 # knife node run_list set chef-node01 "recipe[new-cookbook01::new-recipe]"
 ```
 ##### The output
@@ -403,12 +407,12 @@ chef-node01:
 The above command shows the **cookbook** and the **recipe** are uploaded to the right Chef-client node (chef-node01)
 To verify the recipe in runlist, run the below command <br>
 
-```
+```rb
 # knife node show <node-name>
 ```
 Example:
 
-```
+```rb
 # knife node show chef-node01
 ```
 
@@ -485,7 +489,7 @@ Recipe: new-cookbook01::new-recipe
 update the crontab to run the command chef-client at the specified time (minutes,hours,days etc.)<br>
 
 in the crontab file add the details as below <br>
-```
+```rb
 * * * * *  <user>  chef-client
 ```
 Example:<br>
@@ -513,7 +517,7 @@ b. <ins>High-Availability</ins>   --> Machines configured for front-end and back
 
 8. **Installing the On-Prem Chef-Server, which is a Stand-Alone server**
 #### The steps to follow to install the Chef-Server on Ubuntu is as below
-
+**Download the [Chef-Server](https://downloads.chef.io/products/infra-server?os=ubuntu)**
 ##### Download the Chef-Server Package with Wget 
 ```rb
  #wget https://packages.chef.io/files/stable/chef-server/14.0.65/ubuntu/20.04/chef-server-core_14.0.65-1_amd64.deb

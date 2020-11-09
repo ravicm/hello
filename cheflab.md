@@ -1,7 +1,7 @@
 ## Chef Lab:
 
 ##### Agenda:
-Chef is a configuration management tool to manage small and large scale infrastructure. The Lab exercise show the [requirements](https://docs.chef.io/chef_system_requirements)setup and working with Chef configuration <br>
+Chef is a configuration management tool to manage small and large scale infrastructure. The Lab exercise show the [requirements](https://docs.chef.io/chef_system_requirements), setup and working with Chef configuration <br>
 To manage the infrastructure, Chef requires two Linux-based servers one for Chef-server and the other for Chef-Workstation. <br>
 However small organizations can use the [Chef managed Server](https://manage.chef.io/) instead of ON-Prem Server. However, workstation shall be installed in On-Prem<br>
 The Lab setup discussed below, a. Chef-Workstation and Chef-Client are On-Prem and b. Chef-Server set up on both [Chef managed Server](https://manage.chef.io/) and 

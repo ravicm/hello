@@ -3,11 +3,11 @@
 ##### Agenda:
 <p style='color:red'> Chef is a configuration management tool to manage small and large scale infrastructure. The Lab exercise show the setup and working with Chef configuration.
 Requirements of Chef configuration(https://docs.chef.io/chef_system_requirements/). <br>
-To manage the infrastructure, Chef requires two Linux based servers one for Chef-server and other for Chef-Workstation. <br>
-However small organizations can use the Chef managed Server instead of ON-Prem Server(https://manage.chef.io/). However workstation shall be installed On_prem
+To manage the infrastructure, Chef requires two Linux-based servers one for Chef-server and the other for Chef-Workstation. <br>
+However small organizations can use the Chef managed Server instead of ON-Prem Server(https://manage.chef.io/). However, workstation shall be installed On_prem
 Below Lab setup discussed the installation of Chef-Server online and On-Prem. </p>
 
-#### **This part of Lab describes how to setup the Chef workstation and start creating workbooks and recipes**
+#### **This part of Lab describes how to set up the Chef workstation and start creating workbooks and recipes**
 
 ###   Chef-Workstation:
 Chef workstation is a Linux node which all the configurations are created and tested, all successfull configurations are pushed to Chef-Server. <br>
@@ -27,7 +27,7 @@ However the entire Lab discussed on **Ubuntu-OS**
 ```rb
 # dpkg -i chef-workstation_20.10.168-1_amd64.deb
 ```
-###### Once the chef is installed, verify the version with below command, to ensure it is installed
+###### Once the chef is installed, verify the version with the below command, to ensure it is installed
 ```rb
 #chef --version
 ```
@@ -56,7 +56,7 @@ g. test            --> for integration test
 ```
  
 5. **Create recipe**
-##### TO create recipe, change the directory to required cookbook, and run below command
+##### TO create a recipe, change the directory to the required cookbook, and run the below command
 ```rb
 # cd <new-cookbook>
 ```
@@ -82,17 +82,17 @@ content 'Chef new file'
 action :create                
 end                           
 ```
-#### To ensure no syntax error of the file, also when ever the changes made to recipe file this command will ensure the syntax errors
+#### To ensure no syntax error of the file, also whenever the changes made to recipe file this command will ensure the syntax errors
 ```
 # chef exec ruby -c new-cookbook/recipes/new-recipie.rb 
 ```
-#### If no errors found in the code, first time this will be executed locally on the workstation machine with below command
+#### If no errors found in the code, the first time this will be executed locally on the workstation machine with the below command
 #### Run the chef-client to execute the recipe
 
 ```rb
 # chef-client -zr "recipe[new-cookbook::new-recipe]"
 ```
-#### On successful run it produces the output as 
+#### On the successful run it produces the output as 
 
 ```rb
 Starting Chef Infra Client, version 16.6.14
@@ -118,7 +118,7 @@ Chef Infra Client finished, 1/1 resources updated in 01 seconds
 #### Creating multiple recipes
 
 To install multiple packages at the same time, the below example will perform 3 tasks at a time
-##### This will run multiple tasks like creating 'testfile' and installing packages 'tree' and 'apache' as show below
+##### This will run multiple tasks like creating 'testfile' and installing packages 'tree' and 'apache' as shown below
 a. Creating 'testfile
 
 ```rb
@@ -152,7 +152,7 @@ service 'apache2' do            # --> start the httpd service
 action [:enable, :start] 
 end  
 ```
-##### The recipe file for installing above multiple packages is as below
+##### The recipe file for installing the above multiple packages is as below
 
 ```rb
 file 'testfile' do        
@@ -178,7 +178,7 @@ service 'apache2' do
 action [:enable, :start] 
 end  
 ```
-Once the file is created, execute with syntax check command, on successfully verifying no syntax errors run the clinet locally
+Once the file is created, execute with syntax check command, on successfully verifying no syntax errors run the client locally
 ```
 # chef exec ruby -c new-cookbook/recipes/new-recipie.rb 
 # chef-client -zr "recipe[new-cookbook::new-recipe]" 
@@ -187,7 +187,7 @@ Once the file is created, execute with syntax check command, on successfully ver
 
 6. <ins>**Create Cher Server and attaching nodes** </ins> <br>
 
-create account in manage.chef.io webseite which acts as chef server for workstation and nodes 
+create an account in manage.chef.io website which acts as chef-server for workstation and nodes 
 https://manage.chef.io/login <br>
 
 create organization and add nodes, organization  discriminates types of nodes (like web, db etc) <br>
@@ -217,7 +217,7 @@ if local machine is linux use "scp"  <br>
  # cd .chef 
  ```
  which displays .config.rb  and the pem file( which is a private key)
- .config.rb consists of the url of chef server
+ .config.rb consists of the url of chef-server
  run the below command to verify the workstation connectivity to the server
  ```rb
 # knife ssl check
@@ -228,18 +228,18 @@ Connecting to host api.chef.io:443
 Successfully verified certificates from `api.chef.io`
 ```
 
-Upon connecting the workstation to chef server, next step is to connect the nodes, to the server <br>
-the process of connecting the node to server is called BOOTSTRAPPING <br>
-the process bootstrapping ensures the server connectivity to the node by installing "chef client" and "ohai" <br>
-<ins>chef-client</ins> is process ensures the node connectivity to the chef server to get updates <br>
+Upon connecting the workstation to the chef server, the next step is to connect the nodes, to the server <br>
+the process of connecting the node to the server is called BOOTSTRAPPING <br>
+the process bootstrapping ensures the server connectivity to the node by installing "chef-client" and "ohai" <br>
+<ins>chef-client</ins> is process ensures the node connectivity to the chef-server to get updates <br>
 <ins>ohai</ins> is the internal DB, which tells the chef-client about the status of the installations <br>
 
 The essentials of creating the nodes <br>
-If the nodes are in cloud, make sure the ssh is working, the node private key file(.pem file) is copied to workstation's chef-repo directory to enable secure connection (ssh/scp). though workstation don't directly ssh into the node, copying the key into workstation enables ssh to the node <br>
+If the nodes are in the cloud, make sure the ssh is working, the node private key file(.pem file) is copied to the workstation's chef-repo directory to enable secure connection (ssh/scp). though workstation don't directly ssh into the node, copying the key into workstation enables ssh to the node <br>
 The required ports are opened properly(port 22 for ssh and other application ports like port 80 for web etc.) <br>
 
 **copy the nodes private key to workstation "chef-repo" directory** 
-To run anything on the Chef-Client, all the configurations are created and worked at Chef-wrokstation and will be uploaded to server and server inturn uploads to clients. To update on Clients we use the command starting with **"Knife"**
+To run anything on the Chef-Client, all the configurations are created and worked at Chef-workstation and will be uploaded to the server and server in turn uploads to clients. To update on Clients we use the command starting with **"Knife"**
 
 To create the chef-client on the node, run the below command  <br>
 
@@ -307,16 +307,16 @@ Running handlers:
  [xx.xx.xx.xx] Chef Infra Client finished, 0/0 resources updated in 02 seconds
  ```
  Once the chef-client is successfully installed on the node, run the below command on chef-workstation <br>
- The lists the nodes which has the chef client installed <br>
+ The lists the nodes which have the chef-client installed <br>
  
  ```rb
  # knife node list
  ```
  
-Initially during the setup of workstation the directory cookbooks is created and ran the various recipes like **create file, install package and created webserver**.
+Initially, during the setup of the workstation, the directory cookbooks are created and ran the various recipes like **create a file, install package, and created webserver**.
 This ensures the proper running of the packages and installations locally <br> 
 
-After the downloading,  extracting the **chef-repo**  from server, the chef-repo will also consists of cookbooks <br>
+After the downloading,  extracting the **chef-repo**  from the server, the chef-repo will also consist of cookbooks <br>
 
 
 Henceforthe all the configuration commands will be executed in **chef-repo** direcotry, the chef-repo directory will have  another Directory **cookbooks**
@@ -338,7 +338,7 @@ upload the cookbook to the server to serve the chef nodes,the command is as foll
 ```
 Example: <br>
 ```
-# knife cookbook  upload new-cookbook01
+# knife cookbook upload new-cookbook01
 ```
 ##### The output
 ```
@@ -349,10 +349,10 @@ Uploads the cookbook new-cookbook01 to server <br>
 On server website, click on policy the uploaded cookbook is visible <br>
 <img src="images/cb01.JPG" > <br>
 
-**Next step is run the uploaded recipe of the cookbook on node, with below command** <br>
-This step is important as the recipe will be updated to chef-client, which is the end-user of the configuration.
+**Next step is run the uploaded recipe of the cookbook on the node, with the below command** <br>
+This step is important as the recipe will be updated to the chef-client, which is the end-user of the configuration.
 **Make sure the right cookbook/recipe uploaded to the correct node**
-This way, the Clients can be divided in categories like Web, DB nodes etc.
+This way, Clients can be divided into categories like Web, DB nodes, etc.
 
 ```
 # knife node run_list set <chef-node> "recipe[cookbook-name::recipe-name]"
@@ -367,7 +367,7 @@ example:
 chef-node01:
   run_list: recipe[new-cookbook01::new-recipe]
 ```
-The above command shows the **cookbook** and the **recipe** are uploaded the right Chef-client node (chef-node01)
+The above command shows the **cookbook** and the **recipe** are uploaded to the right Chef-client node (chef-node01)
 To verify the recipe in runlist, run the below command <br>
 
 ```
@@ -408,7 +408,7 @@ Next time when the recipe is updated, run the below command on chef-workstation 
  #knife cookbook upload new-cookbook01
  ```
  
- This uploads the recipe to server, then run the below command again on the client to update recipe on client <br>
+ This uploads the recipe to the server, then run the below command again on the client to update the recipe on client <br>
  
  ```rb
   # chef-client
@@ -447,9 +447,9 @@ Recipe: new-cookbook01::new-recipe
  Till now the manual process of the upload of recipes to chef-clients is discussed <br>
 
 
-7. **Automate the process, so that the recipe updates will update the client automatically** <br>
+7. **Automate the process so that the recipe updates will update the client automatically** <br>
 
-update the crontab to run the command chef-client at specified time (minutes,hours,days etc.)<br>
+update the crontab to run the command chef-client at the specified time (minutes,hours,days etc.)<br>
 
 in the crontab file add the details as below <br>
 ```
@@ -466,17 +466,17 @@ Example:<br>
 * * * * *  root  chef-client
 ```
 
-This will run the chef every specified time and update the node. However it is not a good idea to automate the workstation <br>
+This will run the chef every specified time and update the node. However, it is not a good idea to automate the workstation <br>
 
 ---
 
-#### The above process is to install the chef with Chef-Server is managed by Chef, where as Workstation and Clients are at own premises
+#### The above process is to install the chef with Chef-Server is managed by Chef, whereas Workstation and Clients are at own premises
 #### Chef allows to have On-Prem Chef-Server, this will enable all to manage locally
 There are two types of On-Prem servers, they are: <br>
 a. <ins>Stand-Alone</ins>        --> Everything on a single machine <br>
 b. <ins>High-Availability</ins>  --> Machines configured for front-end and back-end, allowing for failover on the back-end and load-balancing on the front-end, as required <br>
 
-###### There is one more type Tiered setup, however it is deprecated
+###### There is one more type Tiered setup, however, it is deprecated
 
 8. **Installing the On-Prem Chef-Server, which is a Stand-Alone server**
 #### The steps to follow to install the Chef-Server on Ubuntu is as below
@@ -489,7 +489,7 @@ b. <ins>High-Availability</ins>  --> Machines configured for front-end and back-
 ```rb
 #  dpkg -i chef-server-core_14.0.65-1_amd64.deb
 ```
-Once the installation is done, Run the following command, which reconfigures all the installation 
+Once the installation is done, run the following command, which reconfigures all the installation 
 ```
 # chef-manage-ctl reconfigure
 ```
@@ -511,7 +511,7 @@ Recipe: omnibus-chef-manage::default
     +++ /var/opt/chef-manage/etc/.chef-chef-manage-running20201105-87766-yoa1h.json     2020-11-05 09:32:15.869262054 +0000
   ```
   
-  After successful configuration the output will be like
+  After successful configuration, the output will be like
   ```rb
   Running handlers:
 Running handlers complete
@@ -527,7 +527,7 @@ chef-manage Reconfigured!
 ```rb
 # chef-server-ctl org-create 4thcoffee 'A E Inc.' --association_user admin --filename /ae-validator.pem
 ```
-In above example, the org is  '4thcoffee 'A E Inc.',  associated name is 'admin' amd valdator key is 'ae-validator.pem'
+In the above example, the org is  '4thcoffee 'A E Inc.',  associated name is 'admin' and validator key is 'ae-validator.pem'
 
 Once the Org is created, run the reconfiguration command to enable the user and Org
 ```rb
@@ -537,7 +537,7 @@ Once the Org is created, run the reconfiguration command to enable the user and 
 ```rb
  # chef-server-ctl install chef-manage
  ```
- Run the below command to reconfigure the Web Manage, slighly different from above reconfigure
+ Run the below command to reconfigure the Web Manage, slightly different from the above reconfigure
  ```rb
  # chef-manage-ctl reconfigure
  ```
@@ -554,7 +554,7 @@ Once the Org is created, run the reconfiguration command to enable the user and 
 
 Take the username and password, created during the admin user, in this case 
 user: admin
-password: abc123 (strong password is always recommanded)
+password: abc123 (strong password is always recommended)
 
 ##### Once logged in follow the steps in <ins>Point 6</ins> from above description
 

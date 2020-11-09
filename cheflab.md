@@ -9,7 +9,8 @@ On-Prem server.
 
 #### **This part of Lab describes how to set up the Chef workstation and start creating workbooks and recipes**
 
-### 1. Chef-Workstation:
+### <ins>Step 1</ins>
+### Chef-Workstation:
 Chef workstation is a Linux node which all the configurations are created and tested, all successfull configurations are pushed to Chef-Server. <br>
 From the Chef-Server 
 ##### Create workstation
@@ -19,13 +20,13 @@ From the **[chef downloads](https://downloads.chef.io/products/workstation)** <b
 <img src="images/os-1.JPG" > <br>
 
 select the OS and download the required version <br>
-However the entire Lab discussed on **Ubuntu-OS**
-2. Once download started, browser tab pause download and right click on the url, copy the link and run below command <br>
+However the entire Lab discussed on **Ubuntu-OS** <br>
+Once download started, browser tab pause download and right click on the url, copy the link and run below command <br>
 ```rb
 #wget https://packages.chef.io/files/stable/chef-workstation/20.10.168/ubuntu/20.04/chef-workstation_20.10.168-1_amd64.deb
 ```
-3. This will download the package to the workstation node
-##### for ubuntu run below command to install chef, 
+This will download the package to the workstation node
+##### for ubuntu run below command to install chef 
 ```rb
 # dpkg -i chef-workstation_20.10.168-1_amd64.deb
 ```
@@ -33,7 +34,8 @@ However the entire Lab discussed on **Ubuntu-OS**
 ```rb
 #chef --version
 ```
-4. **Create cookbooks directory later we create  all the cookbook**
+### <ins>Step 2</ins>
+**Create cookbooks directory later we create  all the cookbook** <br>
 ```rb
 # mkdir cookbooks
 ```
@@ -77,8 +79,8 @@ root@chef-wrokstation01:~/chef-repo/cookbooks/new-cookbook# tree
 
 7 directories, 17 files
 ```
- 
-5. **Create recipe**
+### <ins>Step 3</ins>
+**Create recipe**
 ##### TO create a recipe, change the directory to the required cookbook, and run the below command
 ```rb
 # cd <new-cookbook>
@@ -211,7 +213,9 @@ Once the file is created, execute with syntax check command, on successfully ver
 ```
 ##### Used same recipe file name new-recipe.rb for testing locally <br>
 
-6. <ins>**Create Cher Server and attaching nodes** </ins> <br>
+### <ins>Step 4</ins>
+
+<ins>**Create Cher Server and attaching nodes** </ins> <br>
 
 create an account in [manage.chef.io](https://manage.chef.io/login) website which acts as chef-server for workstation and nodes<br>
  
@@ -483,8 +487,9 @@ Recipe: new-cookbook01::new-recipe
  
  Till now the manual process of the upload of recipes to chef-clients is discussed <br>
 
+### <ins> Step 5</ins>
 
-7. **Automate the process so that the recipe updates will update the client automatically** <br>
+**Automate the process so that the recipe updates will update the client automatically** <br>
 
 update the crontab to run the command chef-client at the specified time (minutes,hours,days etc.)<br>
 
@@ -594,5 +599,5 @@ Take the username and password, created during the admin user, in this case
 user: admin
 password: abc123 (strong password is always recommended)
 
-##### Once logged in follow the steps in <ins>Point 6</ins> from above description
+##### Once logged in follow the steps in <ins>[Step 4]()</ins> from above description
 

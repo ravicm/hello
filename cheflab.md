@@ -500,7 +500,7 @@ in the crontab file add the details as below <br>
 Example:<br>
 
 ```rb
-# vi /etc/crontab  #  
+# vi /etc/crontab    
 ```
 ####  add the below line into the crontab file and chef-client will run default every one minute and get updates 
 
@@ -511,7 +511,7 @@ Example:<br>
 This will run the chef every specified time and update the node. However, it is not a good idea to automate the workstation <br>
 
 ---
-
+### <ins>Step 6 </ins>
 #### The above process is to install the chef with Chef-Server is managed by Chef, whereas Workstation and Clients are at own premises
 #### Chef allows to have On-Prem Chef-Server, this will enable all to manage locally
 There are two types of On-Prem servers, they are: <br>

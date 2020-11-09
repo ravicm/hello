@@ -446,7 +446,7 @@ Next time when the recipe is updated, run the below command on chef-workstation 
  ```
  example:
  ```
- #knife cookbook upload new-cookbook01
+ # knife cookbook upload new-cookbook01
  ```
  
  This uploads the recipe to the server, then run the below command again on the client to update the recipe on client <br>

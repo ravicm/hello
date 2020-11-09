@@ -1,21 +1,23 @@
 ## Chef Lab:
 
 ##### Agenda:
-<p style='color:red'> Chef is a configuration management tool to manage small and large scale infrastructure. The Lab exercise show the setup and working with Chef configuration.
-Requirements of Chef configuration(https://docs.chef.io/chef_system_requirements/). <br>
+Chef is a configuration management tool to manage small and large scale infrastructure. The Lab exercise show the [requirements](https://docs.chef.io/chef_system_requirements)setup and working with Chef configuration <br>
 To manage the infrastructure, Chef requires two Linux-based servers one for Chef-server and the other for Chef-Workstation. <br>
-However small organizations can use the Chef managed Server instead of ON-Prem Server(https://manage.chef.io/). However, workstation shall be installed On_prem
-Below Lab setup discussed the installation of Chef-Server online and On-Prem. </p>
+However small organizations can use the [Chef managed Server](https://manage.chef.io/) instead of ON-Prem Server. However, workstation shall be installed in On-Prem<br>
+The Lab setup discussed below, a. Chef-Workstation and Chef-Client are On-Prem and b. Chef-Server set up on both [Chef managed Server](https://manage.chef.io/) and 
+On-Prem server.
 
 #### **This part of Lab describes how to set up the Chef workstation and start creating workbooks and recipes**
 
-###   Chef-Workstation:
+### 1. Chef-Workstation:
 Chef workstation is a Linux node which all the configurations are created and tested, all successfull configurations are pushed to Chef-Server. <br>
 From the Chef-Server 
 ##### Create workstation
 ####  Download  chef-workstation
-1. From the **chef downloads** site https://downloads.chef.io/products/workstation  <br>
+From the **[chef downloads](https://downloads.chef.io/products/workstation)** <br>
+
 <img src="images/os-1.JPG" > <br>
+
 select the OS and download the required version <br>
 However the entire Lab discussed on **Ubuntu-OS**
 2. Once download started, browser tab pause download and right click on the url, copy the link and run below command <br>
@@ -187,21 +189,27 @@ Once the file is created, execute with syntax check command, on successfully ver
 
 6. <ins>**Create Cher Server and attaching nodes** </ins> <br>
 
-create an account in manage.chef.io website which acts as chef-server for workstation and nodes 
-https://manage.chef.io/login <br>
+create an account in [manage.chef.io](https://manage.chef.io/login) website which acts as chef-server for workstation and nodes<br>
+ 
 
 create organization and add nodes, organization  discriminates types of nodes (like web, db etc) <br>
 give name and shortname for the organization, this gives to a page where all the configurations are visible <br>
+
 <img src="images/chef-Account.JPG" > <br>
+
 Click on Administration, which displays all the organizations created <br>
 Click on starter kit (left side)--> shows the download "starter kit" --> clicking on it  downloads starterkit  <br>
+
 <img src="images/starter-kit.JPG" > <br>
+
 It downloads into the local machine, which is a .rar file, click on the "chef-starter" to extract the files, and it consists of "chef-repo folder" <br>
 click on chef-repo folder and it consists of <br>
 folders, .chef, cookbooks,roles and files .gitignore and Readme. <br>
 copy the folder chef-repo from local extracted folder  to chef workstation machine <br>
 if local machine is windows use "winscp" <br>
+
 <img src="images/chef-repo.JPG" > <br>
+
 if local machine is linux use "scp"  <br>
  On chef workstation run below commands <br>
  
@@ -347,6 +355,7 @@ Uploaded 1 cookbook.
 ```
 Uploads the cookbook new-cookbook01 to server <br>
 On server website, click on policy the uploaded cookbook is visible <br>
+
 <img src="images/cb01.JPG" > <br>
 
 **Next step is run the uploaded recipe of the cookbook on the node, with the below command** <br>
@@ -547,6 +556,7 @@ Once the Org is created, run the reconfiguration command to enable the user and 
 <img src="images/sec01.JPG"> <br>
 
 ###### Click on advanced and continue
+
 <img src="images/sec02.JPG"> <br>
 
 ###### It opens login web page to manage Chef server

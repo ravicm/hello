@@ -48,13 +48,34 @@ However the entire Lab discussed on **Ubuntu-OS**
  ```
  ```rb
 After creating the chef cookbook, in the cookbook directory,  default files are created like
-a. chefignore      --> ignore while update
-b. kitchen.yml for testing the cookbook 
-c. metadata.rb     --> name,version,author of the cookbook
-d. readme          --> information about the cookbook, user group etc 
-e. recipe          --> is the code file 
-f. spec            --> for unit testing 
-g. test            --> for integration test  
+root@chef-wrokstation01:~/chef-repo/cookbooks/new-cookbook# tree
+.
+├── CHANGELOG.md
+├── LICENSE
+├── Policyfile.rb
+├── README.md                                      --> information about the cookbook, user group etc 
+├── chefignore                                     --> ignore while update
+├── kitchen.yml                                    --> for testing the cookbook 
+├── metadata.rb                                    --> name,version,author of the cookbook
+├── recipes                                        --> is the code file 
+│   ├── default.rb
+│   ├── new-recipe01.rb
+│   └── new-recipie.rb
+├── spec                                           --> for unit testing 
+│   ├── spec_helper.rb
+│   └── unit
+│       └── recipes
+│           ├── default_spec.rb
+│           ├── new-recipe01_spec.rb
+│           └── new-recipie_spec.rb
+└── test                                          --> for integration test 
+    └── integration
+        └── default
+            ├── default_test.rb
+            ├── new-recipe01_test.rb
+            └── new-recipie_test.rb
+
+7 directories, 17 files
 ```
  
 5. **Create recipe**
@@ -68,7 +89,14 @@ Example:
 # chef generate recipe new-recipe
  ```
 which creates recipe file in default recipes directory <br>
-##### Add the content into the recipe file  as show below <br>
+###### Add the content into the recipe file  as show below <br>
+#### The new recipe file will like this
+```rb
+file '/newfile' do            
+content 'Chef new file'       
+action :create                
+end                           
+```
 
 #### new-recipie.rb file is like below, which consists of code: <br>
 ```rb
@@ -77,13 +105,7 @@ content 'Chef new file'       # --> Content in the file, after creation of the f
 action :create                # --> Create the file <br>
 end                           # --> end of the task <br>
 ```
-#### The new recipe file will like this
-```rb
-file '/newfile' do            
-content 'Chef new file'       
-action :create                
-end                           
-```
+
 #### To ensure no syntax error of the file, also whenever the changes made to recipe file this command will ensure the syntax errors
 ```
 # chef exec ruby -c new-cookbook/recipes/new-recipie.rb 
@@ -121,6 +143,33 @@ Chef Infra Client finished, 1/1 resources updated in 01 seconds
 
 To install multiple packages at the same time, the below example will perform 3 tasks at a time
 ##### This will run multiple tasks like creating 'testfile' and installing packages 'tree' and 'apache' as shown below
+##### The recipe file for installing the above multiple packages is as below
+
+```rb
+file 'testfile' do        
+content 'Chef test file'  
+action :create            
+owner 'root'               
+group 'root'
+end
+
+package 'tree' do   
+action :install     
+end 
+ 
+package 'apache2' do    
+action :install 
+end 
+
+file '/var/www/html/index.html' do  
+content 'First delicious recipe' 
+action :create   
+end 
+service 'apache2' do            
+action [:enable, :start] 
+end  
+```
+
 a. Creating 'testfile
 
 ```rb
@@ -154,32 +203,7 @@ service 'apache2' do            # --> start the httpd service
 action [:enable, :start] 
 end  
 ```
-##### The recipe file for installing the above multiple packages is as below
 
-```rb
-file 'testfile' do        
-content 'Chef test file'  
-action :create            
-owner 'root'               
-group 'root'
-end
-
-package 'tree' do   
-action :install     
-end 
- 
-package 'apache2' do    
-action :install 
-end 
-
-file '/var/www/html/index.html' do  
-content 'First delicious recipe' 
-action :create   
-end 
-service 'apache2' do            
-action [:enable, :start] 
-end  
-```
 Once the file is created, execute with syntax check command, on successfully verifying no syntax errors run the client locally
 ```
 # chef exec ruby -c new-cookbook/recipes/new-recipie.rb 

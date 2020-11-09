@@ -123,7 +123,7 @@ a. Creating 'testfile
 
 ```rb
 file 'testfile' do        # --> specify the file
-content 'Chef test file'  #--> content of the file
+content 'Chef test file'  # --> content of the file
 action :create            # --> action on the files
 owner 'root'              # --> owner and group of the file 
 group 'root'
@@ -473,8 +473,8 @@ This will run the chef every specified time and update the node. However, it is 
 #### The above process is to install the chef with Chef-Server is managed by Chef, whereas Workstation and Clients are at own premises
 #### Chef allows to have On-Prem Chef-Server, this will enable all to manage locally
 There are two types of On-Prem servers, they are: <br>
-a. <ins>Stand-Alone</ins>        --> Everything on a single machine <br>
-b. <ins>High-Availability</ins>  --> Machines configured for front-end and back-end, allowing for failover on the back-end and load-balancing on the front-end, as required <br>
+a. <ins>Stand-Alone</ins>         --> Everything on a single machine <br>
+b. <ins>High-Availability</ins>   --> Machines configured for front-end and back-end, allowing for failover on the back-end and load-balancing on the front-end, as required <br>
 
 ###### There is one more type Tiered setup, however, it is deprecated
 

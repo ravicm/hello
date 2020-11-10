@@ -807,23 +807,24 @@ root@chef-wrokstation01:~/chef-repo# knife role from file roles/newrole.rb
 Updated Role newrole
 ```
 
-Once the role is updated to the Chef-Server, login to chef-server, under Policy --> Roles(left side column)
-The newly created role is visible
-
+Once the role is updated to the Chef-Server, login to chef-server, under Policy --> Roles(left side column) <br>
+The newly created role is visible <br>
+<img src="images/role-policy.JPG" > <br>
 **All the nodes which chef-client needs to be installed, should be bootstrapped for the first time**
 
 Connect the roles to the nodes, with below command 	
 ```rb
-# knife node run_list set chef-node01 "role[newrole]"
+# knife node run_list set chef-node01 "role[newrole]" 
 ```
 The output will be like
 ```rb
 chef-node01:
   run_list: role[newrole]
 ```
-This is visible in  chef-server nodes --> editRunList --> Available Roles (rolename is visible)
+This is visible in  chef-server nodes --> editRunList --> Available Roles (rolename is visible) <br>
+<img src="images/role-runlist.JPG" > <br>
 
-Create another file recipe, this will be uploaded via roles
+Create another file recipe, this will be uploaded via roles <br>
 
 ```rb
 # cd chef-repo/cookbooks/new-cookbook01

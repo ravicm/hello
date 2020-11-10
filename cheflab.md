@@ -390,7 +390,7 @@ On server website, click on policy the uploaded cookbook is visible <br>
 
 <img src="images/cb01.JPG" > <br>
 
-**Next step is run the uploaded recipe of the cookbook on the node, with the below command** <br>
+##### Next step is run the uploaded recipe of the cookbook on the node, with the below command <br>
 This step is important as the recipe will be updated to the chef-client, which is the end-user of the configuration.
 **Make sure the right cookbook/recipe uploaded to the correct node**
 This way, Clients can be divided into categories like Web, DB nodes, etc.

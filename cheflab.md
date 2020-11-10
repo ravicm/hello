@@ -520,7 +520,7 @@ b. <ins>High-Availability</ins>   --> Machines configured for front-end and back
 
 ###### There is one more type Tiered setup, however, it is deprecated
 
-8. **Installing the On-Prem Chef-Server, which is a Stand-Alone server**
+**Installing the On-Prem Chef-Server, which is a Stand-Alone server**
 #### The steps to follow to install the Chef-Server on Ubuntu is as below
 **Download the [Chef-Server](https://downloads.chef.io/products/infra-server?os=ubuntu)**
 ##### Download the Chef-Server Package with Wget 
@@ -601,3 +601,159 @@ password: abc123 (strong password is always recommended)
 
 ##### Once logged in follow the steps in <ins>[Step 4]()</ins> from above description
 
+### <ins>Step 7 </ins>
+### Chef-Attributes
+
+[Attributes](https://docs.chef.io/attributes/) are the key components for dynamically configuring cookbooks <br>
+Attributes are used by Chef Infra Client to understand: <br>
+The current state of the node<br>
+What the state of the node was at the end of the previous Chef Infra Client run<br>
+What the state of the node should be at the end of the current Chef Infra Client run<br>
+
+Types of attributes<br>
+
+a. Default<br>
+b. Force-Default<br>
+c. Normal<br>
+d. Override<br>
+e. Force-override<br>
+f. Automatic<br>
+
+
+Atrributes can be defined in <br>
+Nodes<br>
+cookbooks <br>
+roles<br>
+environments<br>
+
+
+Attributes defined in the Ohai will have the highest priority<br>
+Attributes defined in the recipe will have the next highest priority<br>
+Attributes defined in files will have next priority after above both<br>
+
+Types of Attributes are user-defined and system defined<br>
+User-Defined are used in recipes, Custom Defined can be found in Ohai<br>
+
+**ohai** command can be used with IP address, hostname, memory, platform <br>
+
+
+Chef-Attributes are Key-Value pairs, for any key if the value is dynamic, chef-attributes helps to define recipes accordingly, which not only 
+reduces the number of recipes, but also the complexity significantly. 
+
+There are 6 types of attributes the first one has the lowest and the last one with the highest priority
+
+Types of chef-attributes 
+
+a. Default
+b. Force-Default
+c. Normal
+d. Override
+e. Force-override
+f. Automatic  ( Which is used by Ohai)
+
+Chef-Attributes can be defined in 
+a. nodes
+b. cookbooks
+c. roles
+d. environments
+
+[Ohai](https://docs.chef.io/ohai/) which has the complete configuration and infrastructure information, is very important to define the attributes 
+Based on the Ohai information, attributes can be configured
+
+Ohai command will give all infrastructure and configuration output which is 5000+ lines
+```rb
+# ohai
+```
+
+However to filter the output, run commands with filters like below
+```rb
+# ohai hostname 
+```
+Gives hostname of the nodes
+```rb
+#ohai ipaddress
+```
+Gives ip address of the host ( private ip of the virtual host)
+```rb
+#ohai platform
+```
+Gives the OS, Linux or Ubuntu
+The same way can be used for memory network etc. 
+
+Create a recipe and add key values to get the values of the node from Ohai, move the cookbooks directory and change to the required cookbook to create a recipe
+```rb
+cd cookbooks/new-cookbook
+
+# chef generate recipe ohai-recipe
+```
+The Tree output of the recipe shows the recipe file ohai-recipe.rb is created
+```rb
+recipes
+│   ├── default.rb
+│   ├── new-recipe.rb
+│   ├── new-recipe01.rb
+│   ├── new-recipie.rb
+│   └── ohai-recipe.rb
+```
+Open recipe file hai-recipe.rb and add the contents
+
+vi cookbooks/new-cookbook/ohai-recipe.rb
+```rb
+file '/infrainfo' do
+ content "This is to get Attributes
+ HOSTNAME: #{node['hostname']}
+ IPADDRESS: #{node['ipaddress']}
+ OS: #{node['platform']}
+ MEMORY: #{node['memory']['total']}"
+ owner 'root'
+ group 'root'
+ action :create
+end
+```
+The output in the chef-client is, a file infrainfo is created in / directory and the contents are 
+```rb
+This is to get Attributes
+ HOSTNAME: chef-client01
+ IPADDRESS: 1x.xx8.0.xx
+ OS: ubuntu
+```
+Based on the keys in the recipe file, values are displayed. With the values, further recipes can be written
+
+Below is the theoretical example displays installing Apache on both Ubuntu and RHEL nodes with the help of attributes,
+assuming there are RHEL and Ubuntu servers need to be updated, this required to create multiple recipes for RHEL and 
+Ubuntu nodes make code more complicated. To simplify an attribute is created. 
+
+Part-1, a default.rb file is created in attributes directory, which has keys to get the attribures and install,
+
+...cookbooks/attribute_test/attributes/default.rb
+```rb
+case node['platform']     
+ when "centos","rhel"
+ default['pkg_name']="httpd"
+ default["ser_name"] = "httpd"
+ default["doc_root"] = "/var/www/html"
+ when "ubuntu","debian"
+ default["pkg_name"] = "apache2"
+ default["ser_name"] = "apache2"
+ default["doc_root"] = "/var/www/"
+end
+```
+Part-2, enable/strat the installed package so that the webserver will start working
+
+... cookbooks/attribute_test/recipes/default.rb
+```rb
+package node['pkg_name'] do
+action :install
+end
+service node['ser_name'] do
+action [:start, :enable]
+end
+file "#{node['doc_root']}/welcome.html" do
+  owner 'root'
+  group 'root'
+  mode '0644'
+  content 'hey guys'
+  action :create
+end
+```
+The code will automatically determine the Node, OS, etc. and update accordingly

@@ -757,3 +757,126 @@ file "#{node['doc_root']}/welcome.html" do
 end
 ```
 The code will automatically determine the Node, OS, etc. and update accordingly
+
+### <ins> Step 8 </ins>
+
+Chef-Roles:
+A [Chef-Role](https://docs.chef.io/roles/) is a way to define certain patterns and processes that exist across nodes in an organization as belonging to a single job function <br>
+*Before getting into roles, it is required to understand the [run_list](https://docs.chef.io/run_lists/), in Step 3 and Step 4 when a recipe is uploaded to the nodes <br>
+a run_list, that is which configure a node to the desired state*
+
+Basically when a new cookbook and recipe are created, every time the new cookbook and recipe need to be updated with run_list 
+verify [Step 4](https://github.com/sarmapannala/hello/blob/master/cheflab.md#next-step-is-run-the-uploaded-recipe-of-the-cookbook-on-the-node-with-the-below-command-)
+If a roles is created and define the new cookbooks and recipes,  all the new cookbooks and recipes can be updated via Chef-Roles
+
+On Chef-Workstation run the below commands
+
+```rb
+# cd chef-repo
+```
+Under chef-repo, roles directory is listed
+
+```rb
+root@chef-wrokstation01:~/chef-repo# ls
+README.md  cookbooks nodes  roles
+```
+Tree output
+```rb
+├── nodes
+│   └── sarmapsin.json
+└── roles
+    └── starter.rb
+```
+Create a new role file (default.rb is a default role) with the editor
+
+```rb
+# cd roles
+~/chef-repo/roles#  vi newrole.rb
+```
+Add the below contents in the newrole
+
+```rb
+name "newrole"
+description "role upload file"
+runlist "recipe[new-cookbook01::new-recipe]"
+```
+Once the role is created, need to update the role with the below command 
+
+```rb
+root@chef-wrokstation01:~/chef-repo# knife role from file roles/newrole.rb
+Updated Role newrole
+```
+
+Once the role is updated to the Chef-Server, login to chef-server, under Policy --> Roles(left side column)
+The newly created role is visible
+
+**All the nodes which chef-client needs to be installed, should be bootstrapped for the first time**
+
+Connect the roles to the nodes, with below command 	
+```rb
+# knife node run_list set chef-node01 "role[newrole]"
+```
+The output will be like
+```rb
+chef-node01:
+  run_list: role[newrole]
+```
+This is visible in  chef-server nodes --> editRunList --> Available Roles (rolename is visible)
+
+Create another file recipe, this will be uploaded via roles
+
+```rb
+# cd chef-repo/cookbooks/new-cookbook01
+```
+Create a new recipe
+
+```rb
+# chef generate recipe new-recipe03
+```
+Add below contents into the new recipe
+
+```
+file '/rolefile' do
+ content "This is to get Attributes
+ HOSTNAME: #{node['hostname']}
+ IPADDRESS: #{node['ipaddress']}
+ OS: #{node['platform']}
+ MEMORY: #{node['memory']['total']}"
+ owner 'root'
+ group 'root'
+ action :create
+end
+```
+
+Open the role file created 
+
+```
+# cd chef-repo/roles
+```
+Change the recipe of the role file, like below
+```rb
+name "newrole"
+description "role upload file"
+run_list "recipe[new-cookbook01::new-recipe03]"
+```
+	
+Upload the updated role file to the server (make sure the cookbooks are uploaded "knife cookbook  upload new-cookbook01" initially)
+
+```rb
+knife role from file roles/newrole.rb
+```
+The output will be
+```rb
+Updated Role newrole
+```
+
+A new file is created in the node(s) named "rolefile"
+
+```rb
+cat /rolefile
+This is to get Attributes
+ HOSTNAME: chef-client01
+ IPADDRESS: 10.128.0.12
+ OS: ubuntu
+ MEMORY: 4029860kB
+ ```

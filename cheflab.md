@@ -599,7 +599,7 @@ Take the username and password, created during the admin user, in this case
 user: admin
 password: abc123 (strong password is always recommended)
 
-##### Once logged in follow the steps in <ins>[Step 4]()</ins> from above description
+##### Once logged in follow the steps in <ins>[Step 4](https://github.com/sarmapannala/hello/blob/master/cheflab.md#step-4)</ins> from above description
 
 ### <ins>Step 7 </ins>
 ### Chef-Attributes
@@ -767,7 +767,7 @@ Chef-Roles are creaetd during the setup of the Chef in the organization, if ther
 the run_list which created during the first recipe upload will keep the chef-clients in desired state based on the updated data* <br>
 
 Basically when a new cookbook and recipe are created, every time the new cookbook and recipe need to be updated with run_list 
-verify [Step 4](https://github.com/sarmapannala/hello/blob/master/cheflab.md#next-step-is-run-the-uploaded-recipe-of-the-cookbook-on-the-node-with-the-below-command-)
+verify ["upload recipe"](https://github.com/sarmapannala/hello/blob/master/cheflab.md#next-step-is-run-the-uploaded-recipe-of-the-cookbook-on-the-node-with-the-below-command-)
 If a roles is created and define the new cookbooks and recipes, now all the new cookbooks and recipes can be updated via Chef-Roles
 
 On Chef-Workstation run the below commands

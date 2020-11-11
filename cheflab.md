@@ -11,7 +11,7 @@ On-Prem server.
 
 ### <ins>Step 1</ins>
 ### Chef-Workstation:
-Chef workstation is a Linux node which all the configurations are created and tested, all successfull configurations are pushed to Chef-Server. <br>
+Chef workstation is a Linux node in which all the configurations are created and tested, all successful configurations are pushed to Chef-Server. <br>
 From the Chef-Server 
 ##### Create workstation
 ####  Download  chef-workstation
@@ -20,8 +20,8 @@ From the **[chef downloads](https://downloads.chef.io/products/workstation)** <b
 <img src="images/os-1.JPG" > <br>
 
 select the OS and download the required version <br>
-However the entire Lab discussed on **Ubuntu-OS** <br>
-Once download started, browser tab pause download and right click on the url, copy the link and run below command <br>
+However, the entire Lab discussed on **Ubuntu-OS** <br>
+Once download started, the browser tab pause download and right-click on the url, copy the link, and run below command <br>
 ```rb
 #wget https://packages.chef.io/files/stable/chef-workstation/20.10.168/ubuntu/20.04/chef-workstation_20.10.168-1_amd64.deb
 ```
@@ -221,7 +221,7 @@ create an account in [manage.chef.io](https://manage.chef.io/login) website whic
  
 
 create organization and add nodes, organization  discriminates types of nodes (like web, db etc) <br>
-give name and shortname for the organization, this gives to a page where all the configurations are visible <br>
+give name and short name for the organization, this gives to a page where all the configurations are visible <br>
 
 <img src="images/chef-Account.JPG" > <br>
 
@@ -275,7 +275,7 @@ If the nodes are in the cloud, make sure the ssh is working, the node private ke
 The required ports are opened properly(port 22 for ssh and other application ports like port 80 for web etc.) <br>
 
 **copy the nodes private key to workstation "chef-repo" directory** 
-To run anything on the Chef-Client, all the configurations are created and worked at Chef-workstation and will be uploaded to the server and server in turn uploads to clients. To update on Clients we use the command starting with **"Knife"**
+To run anything on the Chef-Client, all the configurations are created and worked at Chef-workstation and will be uploaded to the server, and the server in turn uploads to clients. To update on Clients we use the command starting with **"Knife"**
 
 To create the chef-client on the node, change to **chef-repo** directory  <br>
 ```rb
@@ -386,7 +386,7 @@ Uploading new-cookbook01 [0.1.0]
 Uploaded 1 cookbook.
 ```
 Uploads the cookbook new-cookbook01 to server <br>
-On server website, click on policy the uploaded cookbook is visible <br>
+On the server website, click on policy the uploaded cookbook is visible <br>
 
 <img src="images/cb01.JPG" > <br>
 
@@ -599,7 +599,7 @@ Take the username and password, created during the admin user, in this case
 user: admin
 password: abc123 (strong password is always recommended)
 
-##### Once logged in follow the steps in <ins>[Step 4](https://github.com/sarmapannala/hello/blob/master/cheflab.md#step-4)</ins> from above description
+##### Once logged in follow the steps in <ins>[Step 4](https://github.com/ravicm/configmgmt-content/blob/sarmachef/cheflab.md#step-4)</ins> from above description
 
 ### <ins>Step 7 </ins>
 ### Chef-Attributes
@@ -620,7 +620,7 @@ e. Force-override<br>
 f. Automatic<br>
 
 
-Atrributes can be defined in <br>
+Attributes can be defined in <br>
 Nodes<br>
 cookbooks <br>
 roles<br>
@@ -764,13 +764,13 @@ Chef-Roles: <br>
 A [Chef-Role](https://docs.chef.io/roles/) is a way to define certain patterns and processes that exist across nodes in an organization as belonging to a single job function <br>
 Chef-Roles are creaetd during the setup of the Chef in the organization, if there are multiple Configs and are complex<br>
 *Before getting into roles, it is required to understand the [run_list](https://docs.chef.io/run_lists/), in Step 3 and Step 4 when a recipe is uploaded to the nodes <br>
-the run_list which created during the first recipe upload will keep the chef-clients in desired state based on the updated data* <br>
+the run_list which created during the first recipe upload will keep the chef-clients in the desired state based on the updated data* <br>
 
-Basically when a new cookbook and recipe are created, every time the new cookbook and recipe need to be updated with run_list 
-verify ["upload recipe"](https://github.com/sarmapannala/hello/blob/master/cheflab.md#next-step-is-run-the-uploaded-recipe-of-the-cookbook-on-the-node-with-the-below-command-)
-If a roles is created and define the new cookbooks and recipes, now all the new cookbooks and recipes can be updated via Chef-Roles
+Basically, when a new cookbook and recipe are created, every time the new cookbook and recipe need to be updated to the node with run_list,
+verify ["upload recipe"](https://github.com/ravicm/configmgmt-content/blob/sarmachef/cheflab.md#next-step-is-run-the-uploaded-recipe-of-the-cookbook-on-the-node-with-the-below-command-) <br>
+If a roles is created and define the new cookbooks and recipes, now all the new cookbooks and recipes can be updated via Chef-Roles which reduces the complexity.<br>
 
-On Chef-Workstation run the below commands
+On Chef-Workstation run the below commands <br>
 
 ```rb
 # cd chef-repo

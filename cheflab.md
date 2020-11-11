@@ -762,6 +762,7 @@ The code will automatically determine the Node, OS, etc. and update accordingly
 
 Chef-Roles: <br>
 A [Chef-Role](https://docs.chef.io/roles/) is a way to define certain patterns and processes that exist across nodes in an organization as belonging to a single job function <br>
+Chef-Roles are creaetd during the setup of the Chef in the organization, if there are multiple Configs and are complex<br>
 *Before getting into roles, it is required to understand the [run_list](https://docs.chef.io/run_lists/), in Step 3 and Step 4 when a recipe is uploaded to the nodes <br>
 the run_list which created during the first recipe upload will keep the chef-clients in desired state based on the updated data* <br>
 

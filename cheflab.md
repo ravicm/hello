@@ -760,14 +760,14 @@ The code will automatically determine the Node, OS, etc. and update accordingly
 
 ### <ins> Step 8 </ins>
 
-Chef-Roles:
+Chef-Roles: <br>
 A [Chef-Role](https://docs.chef.io/roles/) is a way to define certain patterns and processes that exist across nodes in an organization as belonging to a single job function <br>
 *Before getting into roles, it is required to understand the [run_list](https://docs.chef.io/run_lists/), in Step 3 and Step 4 when a recipe is uploaded to the nodes <br>
-a run_list, that is which configure a node to the desired state*
+the run_list which created during the first recipe upload will keep the chef-clients in desired state based on the updated data* <br>
 
 Basically when a new cookbook and recipe are created, every time the new cookbook and recipe need to be updated with run_list 
 verify [Step 4](https://github.com/sarmapannala/hello/blob/master/cheflab.md#next-step-is-run-the-uploaded-recipe-of-the-cookbook-on-the-node-with-the-below-command-)
-If a roles is created and define the new cookbooks and recipes,  all the new cookbooks and recipes can be updated via Chef-Roles
+If a roles is created and define the new cookbooks and recipes, now all the new cookbooks and recipes can be updated via Chef-Roles
 
 On Chef-Workstation run the below commands
 

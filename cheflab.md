@@ -220,7 +220,7 @@ end
 
 Details of the code for running multiple tasks is  
 
-a. Creating 'testfile  
+a. Creating `testfile`
 
 ```rb
 file 'testfile' do        # --> specify the file
@@ -232,50 +232,71 @@ end
 ```
 
 b. Intalling 'tree' package
+
 ```rb
 package 'tree' do   # --> package installation
 action :install     # --> specifying the action
 end 
 ```
+
 c. Installing 'apache' package 
+
 ```rb
 package 'apache2' do   # --> install httpd package 
 action :install 
 end 
+```
 
+d. Creating `/var/www/html/index.html` with sample content  
 
+```
 file '/var/www/html/index.html' do  # --> content in index.html 
-content 'First delicious recipe please taste, the recipe and appreciate us' 
+content 'First delicious recipe please taste, the recipe and appreciate us'  # --> sample content
 action :create   # --> create the file 
 end 
+```
+
+e. Starting `apache2` service  
 
 
+```
 service 'apache2' do            # --> start the httpd service
 action [:enable, :start] 
 end  
 ```
 
-Once the file is created, execute with syntax check command, on successfully verifying no syntax errors run the client locally
+After understanding the code above, run the recipe as show in steps below exactly similar to previous attempt.
+
 ```
 root@chef-wrokstation01:~/cookbooks# chef exec ruby -c new-cookbook/recipes/new-recipie.rb 
 root@chef-wrokstation01:~/cookbooks# chef-client -zr "recipe[new-cookbook::new-recipe]" 
 ```
-Once the recipe is executed, a. file name testfile is created, b. packages tree and apache are installed  
+
+Validating recipe
+
+Once the recipe is executed, validate if all the actions completely successfully.
+
 Output of testfile
+
 ```rb
 root@chef-wrokstation01:~# cat /testfile
 Chef test fileroot@chef-wrokstation01:~#
 ```
+
 Package "tree"
+
 ```rb
 root@chef-wrokstation01:~# which tree
 /usr/bin/tree
 ```
+
 Package "apache"
+
 ```rb
 root@chef-wrokstation01:~# curl localhost
 First delicious recipe please taste, the recipe and appreciate usroot@chef-wrokstation01:~#
 ```
+
 Also open browser and run the IP address of the node   
 
 <img src="images/browser.JPG" >  

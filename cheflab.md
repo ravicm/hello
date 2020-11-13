@@ -149,13 +149,13 @@ On the successful run it produces the output as
 ```rb
 Starting Chef Infra Client, version 16.6.14
 Patents: https://www.chef.io/patents
-resolving cookbooks for run list: ["new-cookbook::new-recipe01"]
+resolving cookbooks for run list: ["new-cookbook::new-recipe"]
 Synchronizing Cookbooks:
   - new-cookbook (0.1.0)
 Installing Cookbook Gems:
 Compiling Cookbooks...
 Converging 1 resources
-Recipe: new-cookbook::new-recipe01
+Recipe: new-cookbook::new-recipe
   * file[/newfile] action create
     - create new file /newfile
     - update content in file /newfile from none to d3b7c9
@@ -168,7 +168,7 @@ Running handlers complete
 Chef Infra Client finished, 1/1 resources updated in 01 seconds
 ```
 
-Verify the new file is created on the localhost
+Verify the new file `newfile` is created on the localhost
 
 ```rb
 root@chef-wrokstation01:~# ls /newfile
@@ -189,6 +189,7 @@ e. start linux service `apache2`
 
 
 The recipe file is as follows and the code is explained in the later section. Copy this content into `new-recipe.rb` file created earlier
+
 
 ```rb
 
@@ -268,7 +269,7 @@ end
 After understanding the code above, run the recipe as show in steps below exactly similar to previous attempt.
 
 ```
-root@chef-wrokstation01:~/cookbooks# chef exec ruby -c new-cookbook/recipes/new-recipie.rb 
+root@chef-wrokstation01:~/cookbooks# chef exec ruby -c new-cookbook/recipes/new-recipe.rb 
 root@chef-wrokstation01:~/cookbooks# chef-client -zr "recipe[new-cookbook::new-recipe]" 
 ```
 
@@ -323,15 +324,15 @@ Click on starter kit (left side)--> shows the download "starter kit" --> clickin
 
 <img src="images/starter-kit.JPG" >  
 
-It downloads into the local machine, which is a .rar file, click on the "chef-starter" to extract the files, and it consists of "chef-repo folder"  
-click on chef-repo folder and it consists of  
-folders, .chef, cookbooks,roles and files .gitignore and Readme  
-copy the folder chef-repo from local extracted folder  to chef workstation machine  
-if local machine is windows use "winscp"  
+It downloads file into the local machine, which is a .rar format, click on the "chef-starter" to extract the files, and it consists of `chef-repo` folder  
+click on `chef-repo` folder and it consists of  
+folders, `.chef, cookbooks,roles and files .gitignore and Readme`.  
+copy the folder `chef-repo` from local extracted folder  to chef workstation machine  
+if local machine is windows use `winscp`   
 
 <img src="images/chef-repo.JPG" >  
 
-if local machine is linux use "scp"  
+if local machine is linux use `scp`  
  On chef workstation run below commands  
  
  ```rb
@@ -346,8 +347,14 @@ if local machine is linux use "scp"
  ```rb
  root@chef-wrokstation01:~/chef-repo# cd .chef 
  ```
- which displays `.config.rb`  and the pem file( which is a private key)
- .config.rb consists of the url of chef-server
+ The .chef directory consists of
+ ```rb
+ root@chef-wrokstation01:~/chef-repo/.chef# ls
+ chef_guid  config.rb  local-mode-cache  user.pem  syntaxcache
+ ```
+ which displays files, out of which `config.rb`  and the `user.pem` file( which is a user's 
+ private key)
+ config.rb consists of the url of chef-server
  ```rb
  cat config.rb
 # See http://docs.chef.io/config_rb.html for more information on knife configuration options
@@ -451,13 +458,19 @@ Running handlers:
  [xx.xx.xx.xx] Running handlers complete
  [xx.xx.xx.xx] Chef Infra Client finished, 0/0 resources updated in 02 seconds
  ```
- Once the chef-client is successfully installed on the node, run the below command on chef-workstation  
+ Once the chef-client is successfully installed on the client node, run the below command on chef-workstation  
  The lists the nodes which have the chef-client installed  
  
  ```rb
  root@chef-wrokstation01:~/chef-repo# knife node list
  ```
- 
+ The output will be 
+ ```rb
+ root@chef-wrokstation01:~/chef-repo# knife node list
+chef-node01
+root@chef-wrokstation01:~/chef-repo#
+```
+
 Initially, during the setup of the workstation, the directory cookbooks are created and ran the various recipes like **create a file, install package, and created webserver**.
 This ensures the proper running of the packages and installations locally  
 
@@ -470,7 +483,7 @@ move the existing cookbooks from  `~cookbooks` folder to `~chef-repo/cookbooks`
 root@chef-wrokstation01:~# mv ~cookbooks ~chef-repo/cookbooks
 root@chef-wrokstation01:~# rm -rf ~cookbooks
 ```
-Once the **chef-repo** is ready, change directory to chef-repo,  
+Once the **chef-repo** is ready, change directory to `chef-repo`,  
 ```rb
 root@chef-wrokstation01:~# cd chef-repo
 ```
@@ -513,7 +526,7 @@ The output
 chef-node01:
   run_list: recipe[new-cookbook01::new-recipe]
 ```
-The above command shows the **cookbook** and the **recipe** are uploaded to the right Chef-client node (chef-node01)  
+The above command shows the **cookbook** and the **recipe** are uploaded to the right `Chef-client` node (chef-node01)  
 To verify the recipe in runlist, run the below command  
 
 ```rb

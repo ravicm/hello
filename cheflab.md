@@ -128,7 +128,7 @@ end                           # --> end of the task
 
 In order to run recipes, the recipe has to be free of any sytax errors. Syntax errors in recipes can be identified by running `chef exec ruby -c <recipe>`.
 
-```
+```rb
 root@chef-wrokstation01:# cd ~/cookbooks
 root@chef-wrokstation01:~/cookbooks# chef exec ruby -c new-cookbook/recipes/new-recipie.rb
 Syntax OK
@@ -140,8 +140,8 @@ Once the recipe is free of syntax errors, the recipe can be executed locally on 
 
 
 ```rb
-# cd ~/cookbooks
-# chef-client -zr "recipe[new-cookbook::new-recipe]"
+root@chef-wrokstation01:# cd ~/cookbooks
+root@chef-wrokstation01:~/cookbooks# chef-client -zr "recipe[new-cookbook::new-recipe]"
 ```
 
 On the successful run it produces the output as 
@@ -159,7 +159,7 @@ Recipe: new-cookbook::new-recipe01
   * file[/newfile] action create
     - create new file /newfile
     - update content in file /newfile from none to d3b7c9
-    --- /newfile   2020-10-28 19:45:59.780289866 +0000
+    --- /newfile   2020-1x-2x 19:45:x9.780289866 +0000
     +++ /.chef-falafal20201028-8246-ckf0aa 2020-10-28 19:45:59.780289866 +0000
     @@ -1 +1,2 @@
     +Chef new file
@@ -243,8 +243,8 @@ end
 
 Once the file is created, execute with syntax check command, on successfully verifying no syntax errors run the client locally
 ```
-# chef exec ruby -c new-cookbook/recipes/new-recipie.rb 
-# chef-client -zr "recipe[new-cookbook::new-recipe]" 
+root@chef-wrokstation01:~/cookbooks# chef exec ruby -c new-cookbook/recipes/new-recipie.rb 
+root@chef-wrokstation01:~/cookbooks# chef-client -zr "recipe[new-cookbook::new-recipe]" 
 ```
 Once the recipe is executed, a. file name testfile is created, b. packages tree and apache are installed  
 Output of testfile
@@ -297,16 +297,17 @@ if local machine is linux use "scp"
  
  ```rb
  # cd chef-repo
+ root@chef-wrokstation01:~/chef-repo#
  ```
  #### to list all files including hidden files
  ```rb
- # ls -al 
+ root@chef-wrokstation01:~/chef-repo# ls -al 
  ```
  #### change directory to .chef
  ```rb
- # cd .chef 
+ root@chef-wrokstation01:~/chef-repo# cd .chef 
  ```
- which displays .config.rb  and the pem file( which is a private key)
+ which displays `.config.rb`  and the pem file( which is a private key)
  .config.rb consists of the url of chef-server
  ```rb
  cat config.rb
@@ -321,7 +322,7 @@ cookbook_path            ["#{current_dir}/../cookbooks"]
 ```
  run the below command to verify the workstation connectivity to the server
  ```rb
-# knife ssl check
+root@chef-wrokstation01:~/chef-repo# knife ssl check
 ```
  if the connection is successful, displays below message
  ```rb
@@ -329,11 +330,11 @@ Connecting to host api.chef.io:443
 Successfully verified certificates from `api.chef.io`
 ```
 
-Upon connecting the workstation to the chef server, the next step is to connect the nodes, to the server  
+Upon connecting the workstation to the chef server, the next step is to connect the nodes to the server,  
 the process of connecting the node to the server is called BOOTSTRAPPING  
-the process bootstrapping ensures the server connectivity to the node by installing "chef-client" and "ohai"  
-<ins>chef-client</ins> is process ensures the node connectivity to the chef-server to get updates  
-<ins>ohai</ins> is the internal DB, which tells the chef-client about the status of the installations  
+the process bootstrapping ensures the server connectivity to the node by installing `chef-client` and `ohai`  
+`chef-client` is process ensures the node connectivity to the chef-server to get updates  
+`ohai` is the internal DB, which tells the chef-client about the status of the installations  
 
 The essentials of creating the nodes   
 * If the nodes are in the cloud, make sure the ssh is working, the node private key file(.pem file) is copied to the workstation's "chef-repo" directory to enable secure connection (ssh/scp). Though workstation don't directly ssh into the node, copying the key into workstation enables ssh to the node  
@@ -344,21 +345,21 @@ To run anything on the Chef-Client, all the configurations are created and worke
 
 To create the chef-client on the node, change to **chef-repo** directory  
 ```rb
-# cd chef-repo
+root@chef-wrokstation01:~# cd chef-repo
 ```
 Run the below command  
 
 ```rb
-# knife bootstrap <node-ip> --ssh-user <user-name>  --sudo -i <privatekey.pem> -N <node-name>
+root@chef-wrokstation01:~/chef-repo# knife bootstrap <node-ip> --ssh-user <user-name>  --sudo -i <privatekey.pem> -N <node-name>
 ```
 
 Example:  
 ```rb
-# knife bootstrap x5.2xx.2x.x7 --ssh-user root --sudo -i priv.pem -N chef-node01
+root@chef-wrokstation01:~/chef-repo# knife bootstrap x5.2xx.2x.x7 --ssh-user root --sudo -i priv.pem -N chef-node01
 ```
 
 Once the command is run, if all the components in the command are correct, the output will be as below  
-It asks for Confirmation Yes/No (Y/N), Type "Y" to continue  
+It asks for Confirmation Yes/No `(Y/N)`, Type "Y" to continue  
 ```rb
 Are you sure you want to continue connecting  --> asks for confirmation
 ? (Y/N) Y   								 # --> type Y
@@ -415,7 +416,7 @@ Running handlers:
  The lists the nodes which have the chef-client installed  
  
  ```rb
- # knife node list
+ root@chef-wrokstation01:~/chef-repo# knife node list
  ```
  
 Initially, during the setup of the workstation, the directory cookbooks are created and ran the various recipes like **create a file, install package, and created webserver**.
@@ -424,26 +425,26 @@ This ensures the proper running of the packages and installations locally
 After the downloading,  extracting the **chef-repo**  from the server, the chef-repo will also consist of cookbooks  
 
 
-Henceforthe all the configuration commands will be executed in **chef-repo** direcotry, the chef-repo directory will have  another Directory **cookbooks**  
-move the existing cookbooks from  ~cookbooks folder to ~chef-repo/cookbooks  
+Henceforthe all the configuration commands will be executed in `chef-repo` direcotry, the chef-repo directory will have  another Directory `cookbooks`  
+move the existing cookbooks from  `~cookbooks` folder to `~chef-repo/cookbooks`  
 ```rb
-# mv ~cookbooks ~chef-repo/cookbooks
-# rm -rf ~cookbooks
+root@chef-wrokstation01:~# mv ~cookbooks ~chef-repo/cookbooks
+root@chef-wrokstation01:~# rm -rf ~cookbooks
 ```
 Once the **chef-repo** is ready, change directory to chef-repo,  
 ```rb
-# cd chef-repo
+root@chef-wrokstation01:~# cd chef-repo
 ```
 
-Once the cookbooks are moved to the chef-repo directory, **Chef server** needs to be updated with the existing cookbooks.  
+Once the cookbooks are moved to the chef-repo directory, `Chef server` needs to be updated with the existing cookbooks.  
 upload the cookbook to the server to serve the chef nodes,the command is as follows  
 
 ```
-# knife cookbook upload <cookbookname>
+root@chef-wrokstation01:~/chef-repo# knife cookbook upload <cookbookname>
 ```
 Example:  
 ```
-# knife cookbook upload new-cookbook01
+root@chef-wrokstation01:~/chef-repo# knife cookbook upload new-cookbook01
 ```
 The output  
 ```
@@ -455,18 +456,18 @@ On the server website, click on policy the uploaded cookbook is visible
 
 <img src="images/cb01.JPG" >  
 
-##### Next step is run the uploaded recipe of the cookbook on the node, with the below command <br>
-This step is important as the recipe will be updated to the chef-client, which is the end-user of the configuration.
+##### Next step is run the uploaded recipe of the cookbook on the node, with the below command  
+This step is important as the recipe will be updated to the `chef-client`, which is the end-user of the configuration.
 **Make sure the right cookbook/recipe uploaded to the correct node**
 This way, Clients can be divided into categories like Web, DB nodes, etc.
 
 ```rb
-# knife node run_list set <chef-node> "recipe[cookbook-name::recipe-name]"
+root@chef-wrokstation01:~/chef-repo# knife node run_list set <chef-node> "recipe[cookbook-name::recipe-name]"
 ```
 example:  
 
 ```rb
-# knife node run_list set chef-node01 "recipe[new-cookbook01::new-recipe]"
+root@chef-wrokstation01:~/chef-repo# knife node run_list set chef-node01 "recipe[new-cookbook01::new-recipe]"
 ```
 The output  
 ```rb
@@ -477,12 +478,12 @@ The above command shows the **cookbook** and the **recipe** are uploaded to the 
 To verify the recipe in runlist, run the below command  
 
 ```rb
-# knife node show <node-name>
+root@chef-wrokstation01:~/chef-repo# knife node show <node-name>
 ```
 Example:  
 
 ```rb
-# knife node show chef-node01
+root@chef-wrokstation01:~/chef-repo# knife node show chef-node01
 ```
 
 The output of the command will be like below  
@@ -507,21 +508,21 @@ on server web page, select the node and click on edit-runlist, which displays th
 Next time when the recipe is updated, run the below command on chef-workstation  
 
 ```rb
- # knife cookbook upload <cookbook-name>
+ root@chef-wrokstation01:~/chef-repo# knife cookbook upload <cookbook-name>
  ```
  example:  
  ```
- # knife cookbook upload new-cookbook01
+ root@chef-wrokstation01:~/chef-repo# knife cookbook upload new-cookbook01
  ```
  
  This uploads the recipe to the server, then run the below command again on the client to update the recipe on client  
  
  ```rb
-  # chef-client
+  root@chef-wrokstation01:~/chef-repo# chef-client
  ```
  Once the chef-client is run, the output will be as below  
  ```rb
- # chef-client
+ root@chef-wrokstation01:~/chef-repo# chef-client
 Starting Chef Infra Client, version 16.6.14
 Patents: https://www.chef.io/patents
 [2020-11-02T13:02:14+00:00] ERROR: shard_seed: Failed to get dmi property serial_number: is dmidecode installed?
@@ -556,16 +557,22 @@ Recipe: new-cookbook01::new-recipe
 
 **Automate the process so that the recipe updates will update the client automatically**  
 
-update the crontab to run the command chef-client at the specified time (minutes,hours,days etc.)  
+update the `crontab` to run the command `chef-client` at the specified time (minutes,hours,days etc.)  
 
 in the crontab file add the details as below  
 ```rb
 * * * * *  <user>  chef-client
 ```
 Example:  
+change the directory from chef-repo to absolute root, 
+```rb
+root@chef-wrokstation01:~# cd ..
+root@chef-wrokstation01:/# ls
+bin  boot  dev  etc  home  infrainfo  lib  lib32  lib64  libx32  lost+found  media  mnt  newfile  opt  proc  root  run  sbin  snap  srv  sys  testfile  tmp  usr  var
+root@chef-wrokstation01:/#
 
 ```rb
-# vi /etc/crontab    
+ vi /etc/crontab    
 ```
 Add the below line into the crontab file and chef-client will run default every one minute and get updates 
 

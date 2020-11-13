@@ -272,7 +272,7 @@ root@chef-wrokstation01:~/cookbooks# chef exec ruby -c new-cookbook/recipes/new-
 root@chef-wrokstation01:~/cookbooks# chef-client -zr "recipe[new-cookbook::new-recipe]" 
 ```
 
-** Validating recipe ** 
+**Validating recipe** 
 
 Once the recipe is executed, validate if all the actions completely successfully.
 

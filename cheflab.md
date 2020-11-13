@@ -695,7 +695,7 @@ Take the username and password, created during the admin user, in this case
 user: admin  
 password: abc123 (strong password is always recommended)  
 
-Once logged in follow the steps in <ins>[Step 3](https://github.com/ravicm/configmgmt-content/blob/sarmachef/cheflab.md#step-4)</ins> from above description  
+Once logged in follow the steps in <ins>[Step 3](#step-3---using-hosted-chef-server-to-manage-target--nodes)</ins> from above description  
 
 ###  Step 5 
 

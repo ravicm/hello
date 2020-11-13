@@ -375,52 +375,24 @@ Connecting to host api.chef.io:443
 Successfully verified certificates from `api.chef.io`
 ```
 
- #### change directory to .chef
- 
- ```rb
- root@chef-wrokstation01:~/chef-repo# cd .chef 
- ```
- 
- The .chef directory consists of
- 
- ```rb
- root@chef-wrokstation01:~/chef-repo/.chef# ls
- chef_guid  config.rb  local-mode-cache  user.pem  syntaxcache
- ```
- 
- which displays files, out of which `config.rb`  and the `user.pem` file( which is a user's 
- private key)
- config.rb consists of the url of chef-server
- ```rb
- cat config.rb
-# See http://docs.chef.io/config_rb.html for more information on knife configuration options
-current_dir = File.dirname(__FILE__)
-log_level                :info
-log_location             STDOUT
-node_name                "sarmapsin"
-client_key               "#{current_dir}/sarmapsin.pem"
-chef_server_url          "https://api.chef.io/organizations/st01"   #--> Chef Serverr URL
-cookbook_path            ["#{current_dir}/../cookbooks"]
-```
+The configuration file with details relating to connectivity to chef sever is present in `chef-repo/.chef/config.rb`
 
+After connecting this workstation to the chef server, the next step is to add target nodes into chef server.
 
-Upon connecting the workstation to the chef server, the next step is to connect the nodes to the server,  
-the process of connecting the node to the server is called BOOTSTRAPPING  
-the process bootstrapping ensures the server connectivity to the node by installing `chef-client` and `ohai`  
-`chef-client` is process ensures the node connectivity to the chef-server to get updates  
-`ohai` is the internal DB, which tells the chef-client about the status of the installations  
+The process of connecting the node to the server is called *BOOTSTRAPPING*. The bootstrapping process will install `chef-client` (and other tools like ohai) and ensure connectivity to the server. `ohai` is the internal DB, which tells the chef-client about the status of the installations. Target nodes are managed by chef-server. 
 
 The essentials of creating the nodes   
 * If the nodes are in the cloud, make sure the ssh is working, the node private key file(.pem file) is copied to the workstation's "chef-repo" directory to enable secure connection (ssh/scp). Though workstation don't directly ssh into the node, copying the key into workstation enables ssh to the node  
-* The required ports are opened properly(port 22 for ssh and other application ports like port 80 for web etc. on cloud nodes or Firewalls for physical nodes)  
+* The required ports are opened properly (port 22 for ssh and other application ports like port 80 for web etc. on cloud nodes or Firewalls for physical nodes)  
 
-**copy the nodes private key to workstation "chef-repo" directory**  
-To run anything on the Chef-Client, all the configurations are created and worked at Chef-workstation and will be uploaded to the server, and the server in turn uploads to clients. To update on Clients we use the command starting with **"Knife"**
+Chef client uploads all the configurations from Chef workstation to the server, and the server in turn passes it to target nodes. **"Knife"** is a command line utility that is useful for these operations.
 
-To create the chef-client on the node, change to **chef-repo** directory  
+let us install the chef-client on the target node (node01) by following the steps below
+
 ```rb
 root@chef-wrokstation01:~# cd chef-repo
 ```
+
 Run the below command  
 
 ```rb
@@ -486,7 +458,8 @@ Running handlers:
  [xx.xx.xx.xx] Running handlers complete
  [xx.xx.xx.xx] Chef Infra Client finished, 0/0 resources updated in 02 seconds
  ```
- Once the chef-client is successfully installed on the client node, run the below command on chef-workstation  
+ Once the chef-client is successfully installed on the client node, run the below command on chef-workstation 
+ 
  The lists the nodes which have the chef-client installed  
  
  ```rb

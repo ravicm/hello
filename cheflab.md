@@ -293,11 +293,15 @@ root@chef-wrokstation01:~# which tree
 Package "apache"
 
 ```rb
+root@chef-wrokstation01:~# systemctl status service_name
+```
+
+(Optional) Also open browser and run the IP address of the node. This step can sometimes fail due to firewall or other issues. Debugging this is outside scope of this excerise
+
+```rb
 root@chef-wrokstation01:~# curl localhost
 First delicious recipe please taste, the recipe and appreciate usroot@chef-wrokstation01:~#
 ```
-
-Also open browser and run the IP address of the node   
 
 <img src="images/browser.JPG" >  
 

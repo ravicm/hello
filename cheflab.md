@@ -129,9 +129,12 @@ end                           # --> end of the task
 In order to run recipes, the recipe has to be free of any sytax errors. Syntax errors in recipes can be identified by running `chef exec ruby -c <recipe>`.
 
 ```
-# cd ~/cookbooks
-# chef exec ruby -c new-cookbook/recipes/new-recipie.rb
+root@chef-wrokstation01:# cd ~/cookbooks
+root@chef-wrokstation01:~/cookbooks# chef exec ruby -c new-cookbook/recipes/new-recipie.rb
+Syntax OK
+root@chef-wrokstation01:~/cookbooks#
 ```
+
 
 Once the recipe is free of syntax errors, the recipe can be executed locally on the workstation machine using `chef-client`
 

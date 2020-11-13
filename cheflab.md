@@ -63,7 +63,7 @@ In the cookbooks directory, generate cookbooks
 After creating the chef cookbook, in the cookbook directory,  default files are created like
 
 ```rb
-root@chef-wrokstation01:~/chef-repo/cookbooks01# tree
+root@chef-wrokstation01:~/cookbooks# tree
 .
 └── new-cookbook
     ├── CHANGELOG.md
@@ -86,27 +86,31 @@ root@chef-wrokstation01:~/chef-repo/cookbooks01# tree
                 └── default_test.rb
 
 8 directories, 11 files
-root@chef-wrokstation01:~/chef-repo/cookbooks01#
+root@chef-wrokstation01:~/cookbooks#
 ```
 
 **Create recipe**  
-TO create a recipe, change the directory to the required cookbook, and run the below command
+Let's create a recipe. `chef generate recipe <recipe-name>` to create a new receipe.
+
+change the directory to `new-cookbook`, and run `chef generate recipe new-recipe`
+
 ```rb
 # cd new-cookbook
-```
-chef generate recipe <recipe-name>  
-	Example:
- ```rb
 # chef generate recipe new-recipe
- ```
-Which creates recipe file in default recipes directory  
-Add the content into the recipe file  as show below  
-The new recipe file will like this
+```
+
+This will create `recipes/new-recipe.rb`, `spec/unit/recipes/new-recipe_spec.rb`,`test/default/new-recipe_test.rb` files. 
+In a recommended practice - every recipes should have spec defined in `spec/unit/recipes/new-recipe_spec.rb`and  relevant test cases in `test/default/new-recipe_test.rb`. However, for the purposes of this lab, our scope is limited to writing just recipes.
+
+Now update `recipes/new-recipe.rb` with the following
+
 ```rb
+root@chef-wrokstation01:~/cookbooks# cat recipes/new-recipe.rb
 file '/newfile' do            
 content 'Chef new file'       
 action :create                
-end                           
+end
+root@chef-wrokstation01:~/cookbooks# 
 ```
 
 new-recipie.rb file is like below, which consists of code and the details of the code is:  

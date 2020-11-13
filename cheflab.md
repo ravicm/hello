@@ -333,9 +333,31 @@ Now that we have some familiarity with cookbooks, receipes. Let's see how to use
  
 Ensure you have copied all files
 
-```rb
-root@chef-wrokstation01:~/chef-repo# tree 
+```rb 
+root@chef-wrokstation01:~/chef-repo# tree
+.
+├── README.md
+├── cookbooks
+│   ├── chefignore
+│   └── starter
+│       ├── attributes
+│       │   └── default.rb
+│       ├── files
+│       │   └── default
+│       │       └── sample.txt
+│       ├── metadata.rb
+│       ├── recipes
+│       │   └── default.rb
+│       └── templates
+│           └── default
+│               └── sample.erb
+└── roles
+    └── starter.rb
+
+9 directories, 8 files
+root@chef-wrokstation01:~/chef-repo#
 ```
+
  
 Run the below command to verify the workstation connectivity to the server. `knife` is already installed on workstation.
 

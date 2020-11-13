@@ -35,13 +35,13 @@ Select the target OS and download the required version. However, the entire Lab 
 #### Install Chef workstation
 
 ```rb
-# dpkg -i chef-workstation_20.10.168-1_amd64.deb
+root@chef-wrokstation01:~ dpkg -i chef-workstation_20.10.168-1_amd64.deb
 ```
 
 Once the chef is installed, verify the version with the below command, to ensure it is installed
 
 ```rb
-#chef --version
+root@chef-wrokstation01:~ chef --version
 ```
 
 ### Step 2
@@ -51,14 +51,14 @@ Once the chef is installed, verify the version with the below command, to ensure
 Create cookbooks directory later we create  other cookbooks
 
 ```rb
-# mkdir ~/cookbooks
-# cd ~/cookbooks
+root@chef-wrokstation01:~# mkdir ~/cookbooks
+root@chef-wrokstation01:~# cd ~/cookbooks
 ```
 
 In the cookbooks directory, generate a new cookbook - `new-cookbook`
 	
  ```rb
-# chef generate cookbook new-cookbook
+root@chef-wrokstation01:~/cookbooks# chef generate cookbook new-cookbook
  ```
 
 This should generate a skeleton cookbook. The files are as follows
@@ -97,8 +97,8 @@ Let us create a recipe. `chef generate recipe <recipe-name>` to create a new rec
 change the directory to `new-cookbook`, and run `chef generate recipe new-recipe`
 
 ```rb
-# cd new-cookbook
-# chef generate recipe new-recipe
+root@chef-wrokstation01:~/cookbooks# cd new-cookbook
+root@chef-wrokstation01:~/cookbooks/new-cookbook# chef generate recipe new-recipe
 ```
 
 This will create `recipes/new-recipe.rb`, `spec/unit/recipes/new-recipe_spec.rb` , `test/integration/default/new-recipe_test.rb` files. 

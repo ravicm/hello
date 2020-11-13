@@ -63,34 +63,30 @@ In the cookbooks directory, generate cookbooks
 After creating the chef cookbook, in the cookbook directory,  default files are created like
 
 ```rb
-root@chef-wrokstation01:~/cookbooks/new-cookbook# tree
+root@chef-wrokstation01:~/chef-repo/cookbooks01# tree
 .
-├── CHANGELOG.md
-├── LICENSE
-├── Policyfile.rb
-├── README.md                                      --> information about the cookbook, user group etc 
-├── chefignore                                     --> ignore while update
-├── kitchen.yml                                    --> for testing the cookbook 
-├── metadata.rb                                    --> name,version,author of the cookbook
-├── recipes                                        --> is the code file 
-│   ├── default.rb
-│   ├── new-recipe01.rb
-│   └── new-recipie.rb
-├── spec                                           --> for unit testing 
-│   ├── spec_helper.rb
-│   └── unit
-│       └── recipes
-│           ├── default_spec.rb
-│           ├── new-recipe01_spec.rb
-│           └── new-recipie_spec.rb
-└── test                                          --> for integration test 
-    └── integration
-        └── default
-            ├── default_test.rb
-            ├── new-recipe01_test.rb
-            └── new-recipie_test.rb
+└── new-cookbook
+    ├── CHANGELOG.md
+    ├── LICENSE
+    ├── Policyfile.rb
+    ├── README.md
+    ├── chefignore
+    ├── kitchen.yml
+    ├── metadata.rb
+    ├── recipes
+    │   └── default.rb
+    ├── spec
+    │   ├── spec_helper.rb
+    │   └── unit
+    │       └── recipes
+    │           └── default_spec.rb
+    └── test
+        └── integration
+            └── default
+                └── default_test.rb
 
-7 directories, 17 files
+8 directories, 11 files
+root@chef-wrokstation01:~/chef-repo/cookbooks01#
 ```
 
 **Create recipe**  

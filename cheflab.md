@@ -865,13 +865,11 @@ The code will automatically determine the Node, OS, etc. and update accordingly
 ###  Step 7 
 
 Chef-Roles:  
-A [Chef-Role](https://docs.chef.io/roles/) is a way to define certain patterns and processes that exist across nodes in an organization as belonging to a single job function  
-Chef-Roles are creaetd during the setup of the Chef in the organization, if there are multiple Configs and are complex<br>
-*Before getting into roles, it is required to understand the [run_list](https://docs.chef.io/run_lists/), in Step 3 and Step 4 when a recipe is uploaded to the nodes 
-the run_list which created during the first recipe upload will keep the chef-clients in the desired state based on the updated data*   
-Basically, when a new cookbook and recipe are created, every time the new cookbook and recipe need to be updated to the node with run_list,
-verify ["upload recipe"](https://github.com/ravicm/configmgmt-content/blob/sarmachef/cheflab.md#next-step-is-run-the-uploaded-recipe-of-the-cookbook-on-the-node-with-the-below-command-)  
-If a roles is created and define the new cookbooks and recipes, now all the new cookbooks and recipes can be updated via Chef-Roles which reduces the complexity  
+A [Chef-Role](https://docs.chef.io/roles/) is a way to define certain patterns and processes that exist across nodes in an organization as belonging to a single job function.
+
+*Before getting into roles, it is required to understand the [run_list](https://docs.chef.io/run_lists/), described in Step 3 and Step 4 
+
+Roles is logical way to group cookbooks and recipes together.
 
 On Chef-Workstation run the below commands  
 
@@ -887,7 +885,7 @@ README.md  cookbooks nodes  roles
 Tree output  
 ```rb
 ├── nodes
-│   └── sarmapsin.json
+│   └── student01.json
 └── roles
     └── starter.rb
 ```
@@ -914,6 +912,7 @@ Updated Role newrole
 Once the role is updated to the Chef-Server, login to chef-server, under Policy --> Roles(left side column)  
 The newly created role is visible  
 <img src="images/role-policy.JPG" >  
+
 **All the nodes which chef-client needs to be installed, should be bootstrapped for the first time**  
 
 Connect the roles to the nodes, with below command  	

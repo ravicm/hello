@@ -307,51 +307,62 @@ First delicious recipe please taste, the recipe and appreciate usroot@chef-wroks
 <img src="images/browser.JPG" >  
 
 
-### Step 3  
+### Step 3 - Using hosted Chef Server to manage target  nodes
 
-<ins>**Create Cher Server and attaching nodes** </ins>  
 
-create an account in [manage.chef.io](https://manage.chef.io/login) website which acts as chef-server for workstation and nodes  
- 
+Now that we have some familiarity with cookbooks, receipes. Let's see how to use chef to manage target nodes. In this step, for simplicity and learning purposes managed chef server will be used. Managed chef-server is a chef-server installation that is managed by third party. In step 4 and later, Installation of chef-server is explained.
 
-create organization and add nodes, organization  segregate the types of nodes (like web, db etc)  
-Give "name" and short "name" for the organization, this gives to a page where all the configurations are visible  
+* Create an account in [manage.chef.io](https://manage.chef.io/login
+* Login into chef server
+* Create an Organization
+	*  Go to Administration from the top -> Organizations (left side) -> Create -> Full Name: <StudentFullName>, Short name: <StudentShortName>
 
-<img src="images/chef-Account.JPG" >  
+* Download starter kit
+	* Click on organization -> starter kit (left side)--> shows the download "starter kit" --> clicking on it downloads starterkit  
 
-Click on Administration, which displays all the organizations created  
-Click on starter kit (left side)--> shows the download "starter kit" --> clicking on it  downloads starterkit  
+<img src="images/starter-kit.JPG" > 
 
-<img src="images/starter-kit.JPG" >  
-
-It downloads file into the local machine, which is a .rar format, click on the "chef-starter" to extract the files, and it consists of `chef-repo` folder  
-click on `chef-repo` folder and it consists of  
-folders, `.chef, cookbooks,roles and files .gitignore and Readme`.  
-copy the folder `chef-repo` from local extracted folder  to chef workstation machine  
-if local machine is windows use `winscp`   
+* Extract start kit, copy `chef-repo` folder to the chef-workstation. If you already downloaded on workstation then nothing to copy. `Winscp` or other equivalent tools can be used to copy files to workstation. 
 
 <img src="images/chef-repo.JPG" >  
-
-if local machine is linux use `scp`  
- On chef workstation run below commands  
  
  ```rb
  # cd chef-repo
  root@chef-wrokstation01:~/chef-repo#
  ```
- #### to list all files including hidden files
- ```rb
- root@chef-wrokstation01:~/chef-repo# ls -al 
- ```
+ 
+Ensure you have copied all files
+
+```rb
+root@chef-wrokstation01:~/chef-repo# tree 
+```
+ 
+Run the below command to verify the workstation connectivity to the server. `knife` is already installed on workstation.
+
+```rb
+root@chef-wrokstation01:~/chef-repo# knife ssl check
+```
+
+If the connection is successful, displays below message
+
+```rb
+Connecting to host api.chef.io:443
+Successfully verified certificates from `api.chef.io`
+```
+
  #### change directory to .chef
+ 
  ```rb
  root@chef-wrokstation01:~/chef-repo# cd .chef 
  ```
+ 
  The .chef directory consists of
+ 
  ```rb
  root@chef-wrokstation01:~/chef-repo/.chef# ls
  chef_guid  config.rb  local-mode-cache  user.pem  syntaxcache
  ```
+ 
  which displays files, out of which `config.rb`  and the `user.pem` file( which is a user's 
  private key)
  config.rb consists of the url of chef-server
@@ -366,15 +377,7 @@ client_key               "#{current_dir}/sarmapsin.pem"
 chef_server_url          "https://api.chef.io/organizations/st01"   #--> Chef Serverr URL
 cookbook_path            ["#{current_dir}/../cookbooks"]
 ```
- run the below command to verify the workstation connectivity to the server
- ```rb
-root@chef-wrokstation01:~/chef-repo# knife ssl check
-```
- if the connection is successful, displays below message
- ```rb
-Connecting to host api.chef.io:443
-Successfully verified certificates from `api.chef.io`
-```
+
 
 Upon connecting the workstation to the chef server, the next step is to connect the nodes to the server,  
 the process of connecting the node to the server is called BOOTSTRAPPING  

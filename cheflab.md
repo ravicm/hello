@@ -176,12 +176,22 @@ root@chef-wrokstation01:~# ls /newfile
 root@chef-wrokstation01:~# cat /newfile
 Chef new fileroot@chef-wrokstation01:~#
 ```
-#### Creating multiple recipes  
 
-To install multiple packages at the same time, the below example will perform 3 tasks at a time  
-On running this task it creates a file name "testfile" and install packages "tree" and "apache"  
-The recipe file for installing the above multiple packages is  
+#### Creating recipe with multiple tasks   
+
+Often a recipe does more than a single/simple task. In order to acheive multiple tasks for example: installing multiple packages, changing multiple files etc.Below is an example to perform 5 tasks - 
+
+a. create a file name `testfile` with sample content 
+b. install package `tree` 
+c. install package `apache` 
+d. create a file `/var/www/html/index.html` with sample content
+e. start linux service `apache2`
+
+
+The recipe file is as follows and the code is explained in the later section. Copy this content into `new-recipe.rb` file created earlier
+
 ```rb
+
 file 'testfile' do        
 content 'Chef test file'  
 action :create            
@@ -201,10 +211,13 @@ file '/var/www/html/index.html' do
 content 'First delicious recipe please taste, the recipe and appreciate us' 
 action :create   
 end 
+
 service 'apache2' do            
 action [:enable, :start] 
 end  
+
 ```
+
 Details of the code for running multiple tasks is  
 
 a. Creating 'testfile  
@@ -217,6 +230,7 @@ owner 'root'              # --> owner and group of the file
 group 'root'
 end
 ```
+
 b. Intalling 'tree' package
 ```rb
 package 'tree' do   # --> package installation

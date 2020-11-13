@@ -51,8 +51,8 @@ Once the chef is installed, verify the version with the below command, to ensure
 Create cookbooks directory later we create  other cookbooks
 
 ```rb
-# mkdir cookbooks
-# cd cookbooks
+# mkdir ~/cookbooks
+# cd ~/cookbooks
 ```
 
 In the cookbooks directory, generate a new cookbook - `new-cookbook`
@@ -101,13 +101,13 @@ change the directory to `new-cookbook`, and run `chef generate recipe new-recipe
 # chef generate recipe new-recipe
 ```
 
-This will create `recipes/new-recipe.rb`, `spec/unit/recipes/new-recipe_spec.rb`,`test/integration/default/new-recipe_test.rb` files. 
+This will create `recipes/new-recipe.rb`, `spec/unit/recipes/new-recipe_spec.rb` , `test/integration/default/new-recipe_test.rb` files. 
 In a recommended practice - every recipe should have spec defined in `spec/unit/recipes/new-recipe_spec.rb`and  relevant test cases in `test/default/new-recipe_test.rb`. However, for the purposes of this lab, our scope is limited to writing just recipes.
 
 Now update `recipes/new-recipe.rb` with the following
 
 ```rb
-root@chef-wrokstation01:~/cookbooks# cat recipes/new-recipe.rb
+root@chef-wrokstation01:~/cookbooks# cat new-cookbook/recipes/new-recipe.rb
 file '/newfile' do            
 content 'Chef new file'       
 action :create                
@@ -129,13 +129,15 @@ end                           # --> end of the task
 In order to run recipes, the recipe has to be free of any sytax errors. Syntax errors in recipes can be identified by running `chef exec ruby -c <recipe>`.
 
 ```
-# chef exec ruby -c new-cookbook/recipes/new-recipie.rb 
+# cd ~/cookbooks
+# chef exec ruby -c new-cookbook/recipes/new-recipie.rb
 ```
 
 Once the recipe is free of syntax errors, the recipe can be executed locally on the workstation machine using `chef-client`
 
 
 ```rb
+# cd ~/cookbooks
 # chef-client -zr "recipe[new-cookbook::new-recipe]"
 ```
 

@@ -312,7 +312,7 @@ First delicious recipe please taste, the recipe and appreciate usroot@chef-wroks
 
 Now that we have some familiarity with cookbooks, receipes. Let's see how to use chef to manage target nodes. In this step, for simplicity and learning purposes managed chef server will be used. Managed chef-server is a chef-server installation that is managed by third party. In step 4 and later, Installation of chef-server is explained.
 
-* Create an account in [manage.chef.io](https://manage.chef.io/login
+* Create an account in [manage.chef.io](https://manage.chef.io/login)
 * Login into chef server
 * Create an Organization
 	*  Go to Administration from the top -> Organizations (left side) -> Create -> Full Name: <StudentFullName>, Short name: <StudentShortName>

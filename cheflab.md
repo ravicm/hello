@@ -465,27 +465,20 @@ Running handlers:
  ```rb
  root@chef-wrokstation01:~/chef-repo# knife node list
  ```
+ 
  The output will be 
+ 
  ```rb
  root@chef-wrokstation01:~/chef-repo# knife node list
 chef-node01
 root@chef-wrokstation01:~/chef-repo#
 ```
 
-Initially, during the setup of the workstation, the directory cookbooks are created and ran the various recipes like **create a file, install package, and created webserver**.
-This ensures the proper running of the packages and installations locally  
+Copy your cookbooks into `chef-repo`
 
-After the downloading,  extracting the **chef-repo**  from the server, the chef-repo will also consist of cookbooks  
-
-
-Henceforthe all the configuration commands will be executed in `chef-repo` direcotry, the chef-repo directory will have  another Directory `cookbooks`  
-move the existing cookbooks from  `~cookbooks` folder to `~chef-repo/cookbooks`  
 ```rb
 root@chef-wrokstation01:~# mv ~cookbooks ~chef-repo/cookbooks
 root@chef-wrokstation01:~# rm -rf ~cookbooks
-```
-Once the **chef-repo** is ready, change directory to `chef-repo`,  
-```rb
 root@chef-wrokstation01:~# cd chef-repo
 ```
 
@@ -495,38 +488,45 @@ upload the cookbook to the server to serve the chef nodes,the command is as foll
 ```
 root@chef-wrokstation01:~/chef-repo# knife cookbook upload <cookbookname>
 ```
+
 Example:  
+
 ```
 root@chef-wrokstation01:~/chef-repo# knife cookbook upload new-cookbook01
 ```
 The output  
 ```
-Uploading new-cookbook01 [0.1.0]
+Uploading new-cookbook [0.1.0]
 Uploaded 1 cookbook.
 ```
 Uploads the cookbook new-cookbook01 to server  
-On the server website, click on policy the uploaded cookbook is visible  
+
+Validate:
+
+On the Chef-server website, click on policy the uploaded cookbook is visible  
 
 <img src="images/cb01.JPG" >  
 
-##### Next step is run the uploaded recipe of the cookbook on the node, with the below command  
-This step is important as the recipe will be updated to the `chef-client`, which is the end-user of the configuration.
-**Make sure the right cookbook/recipe uploaded to the correct node**
-This way, Clients can be divided into categories like Web, DB nodes, etc.
+##### Next step is run the uploaded recipe of the cookbook on the target node, with the below command  
+
 
 ```rb
 root@chef-wrokstation01:~/chef-repo# knife node run_list set <chef-node> "recipe[cookbook-name::recipe-name]"
 ```
-example:  
+
+Example:  
 
 ```rb
 root@chef-wrokstation01:~/chef-repo# knife node run_list set chef-node01 "recipe[new-cookbook01::new-recipe]"
 ```
-The output  
+
+The output:
+
 ```rb
 chef-node01:
   run_list: recipe[new-cookbook01::new-recipe]
 ```
+
 The above command shows the **cookbook** and the **recipe** are uploaded to the right `Chef-client` node (chef-node01)  
 To verify the recipe in runlist, run the below command  
 

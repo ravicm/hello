@@ -363,6 +363,9 @@ Run the below command to verify the workstation connectivity to the server. `kni
 
 ```rb
 root@chef-wrokstation01:~/chef-repo# knife ssl check
+Connecting to host api.chef.io:443
+Successfully verified certificates from `api.chef.io'
+root@chef-wrokstation01:~/chef-repo#
 ```
 
 If the connection is successful, displays below message

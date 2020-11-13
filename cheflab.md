@@ -247,7 +247,8 @@ Package "apache"
 root@chef-wrokstation01:~# curl localhost
 First delicious recipe please taste, the recipe and appreciate usroot@chef-wrokstation01:~#
 ```
-Also open browser and run the IP address of the node  
+Also open browser and run the IP address of the node   
+
 <img src="images/browser.JPG" >  
 
 

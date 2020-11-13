@@ -1,56 +1,68 @@
-## Chef Lab:
+# Chef Lab:
 
-##### Agenda:
-Chef is a configuration management tool to manage small and large scale infrastructure. The Lab exercise show the [requirements](https://docs.chef.io/chef_system_requirements), setup and working with Chef configuration <br>
-To manage the infrastructure, Chef requires two Linux-based servers one for Chef-server and the other for Chef-Workstation. <br>
-However small organizations can use the [Chef managed Server](https://manage.chef.io/) instead of ON-Prem Server. However, workstation shall be installed in On-Prem<br>
-The Lab setup discussed below, a. Chef-Workstation and Chef-Client are On-Prem and b. Chef-Server set up on both [Chef managed Server](https://manage.chef.io/) and 
-On-Prem server.
+## Agenda:
+Chef is a configuration management tool to manage small and large scale infrastructure. The Lab exercise show the [requirements](https://docs.chef.io/chef_system_requirements), setup and working with Chef configuration 
+
+To manage the infrastructure, Chef requires two Linux-based machines one for Chef-server and the other for Chef-Workstation. Small organizations can use the [Chef managed Server](https://manage.chef.io/) instead of setting up and managing Chef Server. 
+
+The Lab setup discussed below, 
+* Installation of Chef-Workstation and Chef-Client 
+* Installation of Chef-Server and using [Chef managed Server](https://manage.chef.io/) 
 
 #### **This part of Lab describes how to set up the Chef workstation and start creating workbooks and recipes**
 
-### <ins>Step 1</ins>
-### Chef-Workstation:
-Chef workstation is a Linux node in which all the configurations are created and tested, all successful configurations are pushed to Chef-Server. <br>
-From the Chef-Server 
-##### Create workstation
+### Step 1
+### Installing workstation
+
+Chef workstation is a Linux node in which all the configurations are created and tested, all successful configurations are pushed to Chef-Server.
+
 ####  Download  chef-workstation
-From the **[chef downloads](https://downloads.chef.io/products/workstation)** <br>
 
-<img src="images/os-1.JPG" > <br>
 
-select the OS and download the required version <br>
-However, the entire Lab discussed on **Ubuntu-OS** <br>
-Once download started, the browser tab pause download and right-click on the url, copy the link, and run below command <br>
+Download the Chef-workstation package using the direct link below
+
 ```rb
 #wget https://packages.chef.io/files/stable/chef-workstation/20.10.168/ubuntu/20.04/chef-workstation_20.10.168-1_amd64.deb
 ```
-This will download the package to the workstation node
-##### for ubuntu run below command to install chef 
+
+Alternatively, download link can be obtained from the download section of chef website  [here](https://downloads.chef.io/products/workstation)
+
+<img src="images/os-1.JPG" > 
+
+Select the target OS and download the required version. However, the entire Lab discussed here is based on **Ubuntu-OS**. 
+
+
+#### Install Chef workstation
+
 ```rb
 # dpkg -i chef-workstation_20.10.168-1_amd64.deb
 ```
-###### Once the chef is installed, verify the version with the below command, to ensure it is installed
+
+#### Once the chef is installed, verify the version with the below command, to ensure it is installed
+
 ```rb
 #chef --version
 ```
-### <ins>Step 2</ins>
-**Create cookbooks directory later we create  all the cookbook** <br>
+
+### Step 2
+
+#### Create cookbooks directory later we create  all the cookbook** 
+
 ```rb
 # mkdir cookbooks
-```
-#### under cookbooks directory create cookbooks
-```rb
 # cd cookbooks
 ```
 
 **chef generate cookbook <cookbook-name>**
+	
  ```rb
 # chef generate cookbook new-cookbook
  ```
- ```rb
+
 After creating the chef cookbook, in the cookbook directory,  default files are created like
-root@chef-wrokstation01:~/chef-repo/cookbooks/new-cookbook# tree
+
+```rb
+root@chef-wrokstation01:~/cookbooks/new-cookbook# tree
 .
 ├── CHANGELOG.md
 ├── LICENSE
